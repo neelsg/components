@@ -1,2 +1,9 @@
-<div class="p-2 text-blue-700"><a href="/test/button">Test Button</a></div>
-<div class="p-2 text-blue-700"><a href="/test/icon">Test Icon</a></div>
+<script lang="ts">
+	import Link from '$lib/widget/link.svelte';
+</script>
+
+<Link color="blue" href="/test/button">Test Button</Link>
+<Link color="blue" href="/test/link">Test Link</Link>
+<Link color="blue" href="/test/icon">Test Icon</Link>
+<Link color="blue" href="/test/wait">Test Wait</Link>
+<Link color="blue" href="/test/toast">Test Toast</Link>

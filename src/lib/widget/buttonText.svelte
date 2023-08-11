@@ -1,8 +1,6 @@
-<script lang="ts" context="module">
-	export const buttonColors = [null, 'blue', 'green', 'yellow', 'red'] as const;
-</script>
-
 <script lang="ts">
+	import type { buttonColors } from './button.svelte';
+
 	export let color: (typeof buttonColors)[number] = null;
 	export let type: 'button' | 'reset' | 'submit' | null = 'button';
 	export let form: string | null = null;
@@ -15,20 +13,23 @@
 	on:click|stopPropagation
 	class="
     uppercase font-semibold flex items-center transition-colors
+		bg-black dark:bg-white
 		{compact ? '' : 'p-2'}
 		{square == 'right' ? 'rounded-l' : square == 'left' ? 'rounded-r' : square ? '' : 'rounded'}
-    {disabled ? 'text-stone-500' : 'text-white active:text-stone-300'}
     {disabled
-		? 'bg-stone-500 bg-opacity-20'
+		? 'text-stone-500'
 		: color == 'blue'
-		? 'bg-blue-700 hover:bg-blue-500 active:bg-blue-800'
+		? 'text-blue-700 dark:text-blue-400'
 		: color == 'green'
-		? 'bg-lime-700 hover:bg-lime-500 active:bg-lime-800'
+		? 'text-lime-700 dark:text-lime-400'
 		: color == 'yellow'
-		? 'bg-amber-700 hover:bg-amber-500 active:bg-amber-800'
+		? 'text-amber-700 dark:text-amber-400'
 		: color == 'red'
-		? 'bg-red-700 hover:bg-red-500 active:bg-red-800'
-		: 'bg-stone-600 hover:bg-stone-400 active:bg-stone-700'}
+		? 'text-red-700 dark:text-red-400'
+		: 'text-black dark:text-white'}
+    {disabled
+		? 'bg-opacity-5 dark:bg-opacity-5'
+		: 'bg-opacity-0 dark:bg-opacity-0 hover:bg-opacity-20 active:bg-opacity-40 dark:hover:bg-opacity-20 dark:active:bg-opacity-40'}
   "
 	{disabled}
 	{type}

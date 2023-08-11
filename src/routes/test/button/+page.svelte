@@ -1,36 +1,56 @@
 <script lang="ts">
 	import Button, { buttonColors } from '$lib/widget/button.svelte';
+	import ButtonText from '$lib/widget/buttonText.svelte';
 
-	const modes = ['light', 'dark'];
+	const disableds = [false, true] as const;
+	const squares = [false, true] as const;
+	const texts = [false, true] as const;
+	const compacts = [false, true] as const;
 	let clicks = [0, 0, 0, 0, 0];
 </script>
 
-{#each modes as mode}
-	<div class="p-2 {mode == 'dark' ? 'dark bg-stone-900 text-white' : 'bg-stone-50'}">
-		<div class="text-xl">{mode} mode</div>
-		<div class="p-2">
-			<div class="text-lg">regular</div>
-			<div class="p-2 flex">
-				{#each buttonColors as color, idx}
+<div>
+	{#each squares as s}
+		{#each texts as t}
+			{#each compacts as m}
+				{#each disableds as d}
 					<div class="p-2">
-						<Button {color} on:click={() => (clicks[idx] += 1)}>
-							{color}: {clicks[idx]}
-						</Button>
+						<div class="text-lg">
+							{s ? 'square' : 'rounded'}
+							{t ? 'text' : ''}
+							{m ? 'compact' : ''}
+							{d ? 'disabled' : ''}
+						</div>
+						<div class="p-2 flex">
+							{#each buttonColors as c, i}
+								<div class="p-2">
+									{#if t}
+										<ButtonText
+											color={c}
+											compact={m}
+											disabled={d}
+											square={s}
+											on:click={() => (clicks[i] += 1)}
+										>
+											{c}: {clicks[i]}
+										</ButtonText>
+									{:else}
+										<Button
+											color={c}
+											compact={m}
+											disabled={d}
+											square={s}
+											on:click={() => (clicks[i] += 1)}
+										>
+											{c}: {clicks[i]}
+										</Button>
+									{/if}
+								</div>
+							{/each}
+						</div>
 					</div>
 				{/each}
-			</div>
-		</div>
-		<div class="p-2">
-			<div class="text-lg">disabled</div>
-			<div class="p-2 flex">
-				{#each buttonColors as color, idx}
-					<div class="p-2">
-						<Button {color} disabled on:click={() => (clicks[idx] += 1)}>
-							{color}: {clicks[idx]}
-						</Button>
-					</div>
-				{/each}
-			</div>
-		</div>
-	</div>
-{/each}
+			{/each}
+		{/each}
+	{/each}
+</div>
