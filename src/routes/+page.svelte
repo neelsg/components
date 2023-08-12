@@ -7,3 +7,5 @@
 <Link color="blue" href="/test/icon">Test Icon</Link>
 <Link color="blue" href="/test/wait">Test Wait</Link>
 <Link color="blue" href="/test/toast">Test Toast</Link>
+<Link color="blue" href="/test/popup">Test Popup</Link>
+<Link color="blue" href="/test/input">Test Input</Link>

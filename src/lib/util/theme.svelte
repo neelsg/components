@@ -15,7 +15,7 @@
 				} else {
 					window.document.body.classList.remove('dark');
 				}
-				window.document.body.classList.toggle('bg-stone-900');
+				window.document.body.classList.toggle('bg-stone-950');
 				window.document.body.classList.toggle('bg-stone-50');
 				store.set(goDark ? 'dark' : 'light');
 			}
@@ -28,13 +28,13 @@
 			(!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
 		) {
 			window.document.body.classList.add('dark');
-			window.document.body.classList.add('bg-stone-900');
+			window.document.body.classList.add('bg-stone-950');
 			window.document.body.classList.remove('bg-stone-50');
 			theme.set('dark');
 		} else {
 			window.document.body.classList.remove('dark');
 			window.document.body.classList.add('bg-stone-50');
-			window.document.body.classList.remove('bg-stone-900');
+			window.document.body.classList.remove('bg-stone-950');
 			theme.set('light');
 		}
 	}
