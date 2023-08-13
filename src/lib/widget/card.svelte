@@ -25,9 +25,9 @@
 	on:click|preventDefault|stopPropagation={click}
 	class="
 		text-stone-800 hover:text-black dark:text-stone-300 dark:hover:text-white
-		transition-all w-full flex rounded p-0.5 bg-opacity-40 hover:bg-opacity-100
-		border border-stone-300 dark:border-stone-700
-		hover:shadow hover:shadow-black dark:hover:shadow dark:hover:shadow-stone-400
+		transition-all w-full flex rounded p-0.5 bg-opacity-60 hover:bg-opacity-100
+		shadow shadow-stone-600
+		hover:shadow-md hover:shadow-black dark:hover:shadow-md dark:hover:shadow-stone-400
 		{color == 'slate'
 		? 'bg-slate-500'
 		: color == 'gray'
@@ -78,7 +78,6 @@
 	<div
 		class="
 		rounded w-full flex bg-white dark:bg-black
-		border border-stone-400 dark:border-stone-500
 	"
 	>
 		<slot />

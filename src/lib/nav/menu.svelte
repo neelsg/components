@@ -64,6 +64,9 @@
 							{collapsible}
 							bind:expanded={childExpand[String(i)]}
 							on:expand={() => childExpanded(i)}
+							on:click={() => {
+								opened = false;
+							}}
 						/>
 					{/each}
 				</div>

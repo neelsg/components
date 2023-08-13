@@ -35,7 +35,7 @@
 			bind:this={outlineDiv}
 			on:click={() => (opened = false)}
 			transition:fade={{ duration: 150 }}
-			class="fixed inset-0 z-10 bg-black bg-opacity-60 p-1
+			class="fixed inset-0 z-10 bg-black bg-opacity-60 p-2
         {windowHeight < outlineDiv?.scrollHeight ? 'overflow-y-scroll' : ''}
       "
 		>
@@ -54,7 +54,7 @@
 				>
 					<Icon key="x-mark" />
 				</button>
-				<img class="rounded object-contain max-w-full" {src} {alt} />
+				<img style="min-width: 50%" class="rounded object-contain max-w-full" {src} {alt} />
 			</div>
 		</div>
 	</div>

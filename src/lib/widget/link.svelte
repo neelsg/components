@@ -25,6 +25,10 @@
 		if (h.indexOf('#') > -1) return;
 		if (h[h.length - 1] != '/') href += '/';
 	};
+	const removeTrailingSlash = (h: string): string => {
+		if (h[h.length - 1] == '/') return h.slice(0, -1);
+		return h;
+	};
 </script>
 
 <a
@@ -37,7 +41,7 @@
 		{compact ? '' : 'p-2'}
 		{full ? 'w-full' : ''}
 		{square == 'right' ? 'rounded-l' : square == 'left' ? 'rounded-r' : square ? '' : 'rounded'}
-		{$page.route.id == href || disabled
+		{$page.route.id == removeTrailingSlash(href) || disabled
 		? 'text-stone-500'
 		: color == 'blue'
 		? 'text-blue-700 dark:text-blue-400'
@@ -48,7 +52,7 @@
 		: color == 'red'
 		? 'text-red-700 dark:text-red-400'
 		: 'text-black dark:text-white'}
-    {$page.route.id == href || disabled
+    {$page.route.id == removeTrailingSlash(href) || disabled
 		? 'bg-opacity-5 dark:bg-opacity-5'
 		: 'bg-opacity-0 dark:bg-opacity-0 hover:bg-opacity-20 active:bg-opacity-40 dark:hover:bg-opacity-20 dark:active:bg-opacity-40'}    
   "
