@@ -1,8 +1,9 @@
 <script lang="ts">
-	import Link, { linkColors } from '$lib/widget/link.svelte';
+	import { colorBasic } from '$lib/util/color.js';
+	import Link from '$lib/widget/link.svelte';
 </script>
 
-{#each linkColors as c, i}
+{#each colorBasic as c, i}
 	<div class="flex items-center space-x-2 p-2">
 		<div class="text-lg">
 			{c}

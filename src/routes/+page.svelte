@@ -9,3 +9,6 @@
 <Link color="blue" href="/test/toast">Test Toast</Link>
 <Link color="blue" href="/test/popup">Test Popup</Link>
 <Link color="blue" href="/test/input">Test Input</Link>
+<Link color="blue" href="/test/image">Test Image</Link>
+<Link color="blue" href="/test/card">Test Card</Link>
+<Link color="blue" href="/test/nav">Test Nav</Link>

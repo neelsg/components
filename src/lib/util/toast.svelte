@@ -48,7 +48,7 @@
 <div class="fixed bg-transparent -ml-64 min-w-[512px] left-1/2 bottom-2">
 	{#each $toast as t (t.id)}
 		<div
-			transition:fly={{ y: 32, duration: 160 }}
+			transition:fly={{ y: 32, duration: 150 }}
 			class="
         flex items-center justify-between p-3 m-1
         rounded bg-opacity-90

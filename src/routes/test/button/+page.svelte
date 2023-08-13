@@ -1,5 +1,6 @@
 <script lang="ts">
-	import Button, { buttonColors } from '$lib/widget/button.svelte';
+	import { colorBasic } from '$lib/util/color.js';
+	import Button from '$lib/widget/button.svelte';
 	import ButtonText from '$lib/widget/buttonText.svelte';
 
 	const disableds = [false, true] as const;
@@ -22,7 +23,7 @@
 							{d ? 'disabled' : ''}
 						</div>
 						<div class="p-2 flex">
-							{#each buttonColors as c, i}
+							{#each colorBasic as c, i}
 								<div class="p-2">
 									{#if t}
 										<ButtonText

@@ -1,21 +1,23 @@
-<script lang="ts" context="module">
-	export const buttonColors = [null, 'blue', 'green', 'yellow', 'red'] as const;
-</script>
-
 <script lang="ts">
-	export let color: (typeof buttonColors)[number] = null;
+	import type { colorBasic } from '../util/color.js';
+
+	export let color: (typeof colorBasic)[number] = null;
 	export let type: 'button' | 'reset' | 'submit' | null = 'button';
 	export let form: string | null = null;
 	export let square: true | 'right' | 'left' | false = false;
+	export let full: boolean = false;
 	export let compact: boolean = false;
 	export let disabled: boolean = false;
+	export let upper: boolean = true;
 </script>
 
 <button
 	on:click|stopPropagation
 	class="
-    uppercase font-semibold flex items-center transition-colors
+    font-semibold flex items-center transition-colors
+		{upper ? 'uppercase' : ''}
 		{compact ? '' : 'p-2'}
+		{full ? 'w-full' : ''}
 		{square == 'right' ? 'rounded-l' : square == 'left' ? 'rounded-r' : square ? '' : 'rounded'}
     {disabled ? 'text-stone-500' : 'text-white active:text-stone-300'}
     {disabled

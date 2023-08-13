@@ -28,7 +28,7 @@
 			bind:clientHeight={windowHeight}
 			bind:this={outlineDiv}
 			on:click={close}
-			transition:fade={{ duration: 200 }}
+			transition:fade={{ duration: 150 }}
 			class="fixed inset-0 z-10 bg-black bg-opacity-20 dark:bg-opacity-50
         p-4 sm:py-8 sm:px-12 md:px-20 lg:px-40
         {windowHeight < outlineDiv?.scrollHeight ? 'overflow-y-scroll' : ''}

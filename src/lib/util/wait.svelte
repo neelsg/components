@@ -2,6 +2,7 @@
 	import { writable, get, type Writable } from 'svelte/store';
 	import { goto } from '$app/navigation';
 	import { json } from '@sveltejs/kit';
+	import { page } from '$app/stores';
 
 	export const wait = (() => {
 		const store: Writable<number> = writable(0);
@@ -24,10 +25,21 @@
 				return json({ message: "Can't fetch / submit data while offline" }, { status: 503 });
 			},
 			navigate: async (url: string): Promise<void> => {
-				if (url[0] != '/') {
+				if (url[0] != '/' && url[0] != '#') {
 					window.location.href = url;
 					return;
 				}
+				if (url[0] == '#') {
+					document.body.scrollTop = 0;
+					document.documentElement.scrollTop = 0;
+					if (get(page).url.toString().indexOf('#') == -1) {
+						window.location.replace('#');
+					}
+				}
+				const current = get(page).url.pathname + (get(page).url.hash || '#');
+				const target =
+					url[0] == '#' ? get(page).url.pathname + url : url + (url.indexOf('#') == -1) ? '#' : '';
+				if (current == target) return;
 				store.update((n) => (n += 1));
 				await goto(url);
 				store.update((n) => (n > 0 ? (n -= 1) : 0));
