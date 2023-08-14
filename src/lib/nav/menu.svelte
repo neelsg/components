@@ -70,6 +70,9 @@
 						/>
 					{/each}
 				</div>
+				<footer class="mt-2 p-1 text-xs text-stone-700 dark:text-stone-500">
+					<slot name="footer" />
+				</footer>
 			</div>
 		</div>
 	</div>

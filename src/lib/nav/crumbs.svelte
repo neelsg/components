@@ -14,7 +14,7 @@
 
 {#each nodes as n, i}
 	{#if i == nodes.length - 1}
-		<div class="p-1 text-2xl font-semibold">{n.label}</div>
+		<div class="p-1 text-xl font-semibold">{n.label}</div>
 	{:else}
 		<div class="flex items-center">
 			{#if n.url}

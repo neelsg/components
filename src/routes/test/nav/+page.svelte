@@ -77,5 +77,7 @@
 	]}
 >
 	<Button on:click={openMenu}>Open Menu</Button>
-	<Menu bind:open={openMenu} collapsible nodes={links} />
+	<Menu bind:open={openMenu} collapsible nodes={links}>
+		<div slot="footer">Put your footer here</div>
+	</Menu>
 </Page>
