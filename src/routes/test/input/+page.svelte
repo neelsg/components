@@ -1,11 +1,17 @@
 <script lang="ts">
 	import Input from '$lib/widget/input.svelte';
 	import InputText from '$lib/widget/inputText.svelte';
+	import InputCheck from '$lib/widget/inputCheck.svelte';
+	import InputNumber from '$lib/widget/inputNumber.svelte';
 
 	let val = '';
 	let valText = '';
+	let valCheck = false;
+	let valNum: number = 0;
 	let count = 0;
 	let countText = 0;
+	let countCheck = 0;
+	let countNum = 0;
 </script>
 
 <div class="p-1 text-xl">Standard</div>
@@ -79,4 +85,42 @@
 
 <div class="p-1">
 	<InputText bind:value={valText} rows={3} label="This one only has 3 rows" />
+</div>
+
+<div class="p-1 text-xl">Checkbox</div>
+
+<div class="p-1 flex space-x-2">
+	<label for="in3" class="w-1/2"
+		>Value: {valCheck}, Input count: {countCheck}, Value type: {typeof valCheck}</label
+	>
+	<InputCheck name="in3" bind:value={valCheck} on:input={() => countCheck++} />
+</div>
+
+<div class="p-1 flex space-x-2">
+	<InputCheck bind:value={valCheck} label="This one has a label property" />
+</div>
+
+<div class="p-1 flex space-x-2">
+	<InputCheck bind:value={valCheck} disabled label="This one is disabled" />
+</div>
+
+<div class="p-1 text-xl">Number</div>
+
+<div class="p-1 flex space-x-2">
+	<label for="in4" class="w-1/2"
+		>Value: {valNum}, Input count: {countNum}, Value type: {typeof valNum}</label
+	>
+	<InputNumber bind:value={valNum} name="in4" on:input={() => countNum++} />
+</div>
+
+<div class="p-1">
+	<InputNumber bind:value={valNum} required placeholder="This one is required..." />
+</div>
+
+<div class="p-1">
+	<InputNumber bind:value={valNum} align="right" disabled placeholder="This one is disabled..." />
+</div>
+
+<div class="p-1">
+	<InputNumber bind:value={valNum} align="center" label="This one has a label property" />
 </div>

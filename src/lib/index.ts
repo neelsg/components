@@ -12,6 +12,8 @@ import Card from './widget/card.svelte';
 import Icon, { iconPaths } from './widget/icon.svelte';
 import Image from './widget/image.svelte';
 import Input from './widget/input.svelte';
+import InputCheck from './widget/inputCheck.svelte';
+import InputNumber from './widget/inputNumber.svelte';
 import InputText from './widget/inputText.svelte';
 import Link from './widget/link.svelte';
 import LinkMail from './widget/linkMail.svelte';
@@ -28,6 +30,8 @@ export {
 	iconPaths,
 	Image,
 	Input,
+	InputCheck,
+	InputNumber,
 	InputText,
 	Link,
 	LinkMail,

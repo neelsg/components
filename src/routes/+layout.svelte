@@ -1,8 +1,11 @@
 <script>
 	import '../app.css';
+	import { browser } from '$app/environment';
 	import Wait from '$lib/util/wait.svelte';
-	import Theme from '$lib/util/theme.svelte';
+	import Theme, { theme } from '$lib/util/theme.svelte';
 	import Toast from '$lib/util/toast.svelte';
+
+	if (browser) theme.init();
 </script>
 
 <svelte:head>

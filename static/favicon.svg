@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+  version="1.1"
+  width="128"
+  height="128"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:svg="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <linearGradient id="grad" gradientTransform="rotate(135)">
+      <stop offset="0%" stop-color="#e20" />
+      <stop offset="15%" stop-color="#f00" />
+      <stop offset="95%" stop-color="#d80" />
+    </linearGradient>
+  </defs>
+  <path d="
+      M 10,118
+      L 44,36
+      Q 64,-16 84,32
+      L 118,108
+      L 10,72
+    "
+    stroke="url(#grad)"
+    stroke-width="12"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+</svg>

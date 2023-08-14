@@ -26,7 +26,7 @@
 		<div style="width: {labelSize}%">{label}</div>
 	{/if}
 	<input
-		class="p-1 w-full rounded border
+		class="p-1 w-full rounded border transition-colors
       {align == 'center' ? 'text-center' : align == 'right' ? 'text-right' : ''}
       {disabled
 			? 'bg-transparent border-stone-400 dark:border-stone-600 text-stone-700 dark:text-stone-500'

@@ -5,6 +5,8 @@
 
 	export let href: string;
 	export let color: (typeof colorFull)[number] = null;
+	export let col: boolean = false;
+	export let compact: boolean = false;
 
 	const dispatch = createEventDispatcher();
 	const click = () => {
@@ -25,9 +27,11 @@
 	on:click|preventDefault|stopPropagation={click}
 	class="
 		text-stone-800 hover:text-black dark:text-stone-300 dark:hover:text-white
-		transition-all w-full flex rounded border-opacity-60 hover:border-opacity-100
-		shadow shadow-stone-600 bg-white dark:bg-black border-2
+		transition-all w-full rounded border-opacity-60 hover:border-opacity-100
+		shadow shadow-stone-600 bg-white dark:bg-black border-2 flex justify-between
 		hover:shadow-md hover:shadow-black dark:hover:shadow dark:hover:shadow-stone-300
+		{compact ? '' : 'p-2'}
+		{col ? 'flex-col' : ''}
 		{color == 'slate'
 		? 'border-slate-500'
 		: color == 'gray'

@@ -26,7 +26,7 @@
 		if (h[h.length - 1] != '/') href += '/';
 	};
 	const isCurrent = (href: string): boolean => {
-		if (href.indexOf('#') != -1) return false;
+		if (href.indexOf('#') != -1 || $page.url.hash) return false;
 		const clean = href[href.length - 1] == '/' ? href.slice(0, -1) : href;
 		return $page.route.id == clean;
 	};
