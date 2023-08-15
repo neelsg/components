@@ -13,10 +13,24 @@
 	export let form: string | null = null;
 	export let disabled: boolean = false;
 	export let required: boolean = false;
+	export let used: string[] = [];
 
+	let element: HTMLInputElement | null = null;
 	const dispatch = createEventDispatcher();
+	const updateValidity = (value: string): void => {
+		if (!value) {
+			element?.setCustomValidity('');
+			return;
+		}
+		if (used.includes(value)) {
+			element?.setCustomValidity('This value was also used elsewhere.');
+			return;
+		}
+		element?.setCustomValidity('');
+	};
 	const input = (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
 		value = (e.target as HTMLInputElement).value;
+		updateValidity(value);
 		setTimeout(() => dispatch('input'), 1);
 	};
 </script>
@@ -27,10 +41,13 @@
 	{/if}
 	<input
 		class="p-1 w-full rounded border transition-colors
-      {align == 'center' ? 'text-center' : align == 'right' ? 'text-right' : ''}
+      {align == 'center' ? 'text-center' : align == 'right' ? 'text-right' : 'text-left'}
       {disabled
-			? 'bg-transparent border-stone-400 dark:border-stone-600 text-stone-700 dark:text-stone-500'
-			: 'bg-white dark:bg-stone-800 border-stone-800 dark:border-stone-200 hover:bg-stone-200 dark:hover:bg-stone-700'}
+			? 'border-stone-400 dark:border-stone-700 text-stone-600 dark:text-stone-400'
+			: 'border-stone-900 dark:border-stone-200 text-black dark:text-white'}
+			{disabled
+			? 'bg-transparent'
+			: 'bg-white hover:bg-stone-100 dark:bg-stone-800 dark:hover:bg-stone-700'}
       invalid:border-red-600 dark:invalid:border-red-400
     "
 		on:input={input}
@@ -43,5 +60,6 @@
 		{form}
 		{pattern}
 		{value}
+		bind:this={element}
 	/>
 </label>

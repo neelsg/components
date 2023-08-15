@@ -1,6 +1,6 @@
 {
 	"name": "@neelsg/components",
-	"version": "0.0.8",
+	"version": "0.0.9",
 	"license": "MIT",
 	"description": "A Reusable SvelteKit Components Library",
 	"homepage": "https://github.com/neelsg/components",

@@ -13,7 +13,10 @@ import Icon, { iconPaths } from './widget/icon.svelte';
 import Image from './widget/image.svelte';
 import Input from './widget/input.svelte';
 import InputCheck from './widget/inputCheck.svelte';
+import InputDropdown from './widget/inputDropdown.svelte';
 import InputNumber from './widget/inputNumber.svelte';
+import InputOption from './widget/inputOption.svelte';
+import InputOptionMulti from './widget/inputOptionMulti.svelte';
 import InputText from './widget/inputText.svelte';
 import Link from './widget/link.svelte';
 import LinkMail from './widget/linkMail.svelte';
@@ -31,7 +34,10 @@ export {
 	Image,
 	Input,
 	InputCheck,
+	InputDropdown,
 	InputNumber,
+	InputOption,
+	InputOptionMulti,
 	InputText,
 	Link,
 	LinkMail,

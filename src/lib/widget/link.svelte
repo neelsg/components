@@ -19,16 +19,11 @@
 		dispatch('click', {});
 	};
 
-	$: addTrailingSlash(href);
-	const addTrailingSlash = (h: string) => {
-		if (h[0] != '/') return;
-		if (h.indexOf('#') > -1) return;
-		if (h[h.length - 1] != '/') href += '/';
-	};
-	const isCurrent = (href: string): boolean => {
-		if (href.indexOf('#') != -1 || $page.url.hash) return false;
-		const clean = href[href.length - 1] == '/' ? href.slice(0, -1) : href;
-		return $page.route.id == clean;
+	const noHash = (hash: string, href: string): boolean => {
+		if (hash) return false;
+		const idx = href.indexOf('#');
+		if (idx > -1 && idx != href.length - 1) return false;
+		return true;
 	};
 </script>
 
@@ -42,7 +37,7 @@
 		{compact ? '' : 'p-2'}
 		{full ? 'w-full' : ''}
 		{square == 'right' ? 'rounded-l' : square == 'left' ? 'rounded-r' : square ? '' : 'rounded'}
-		{isCurrent(href) || disabled
+		{($page.route.id == href && noHash($page.url.hash, href)) || disabled
 		? 'text-stone-500'
 		: color == 'blue'
 		? 'text-blue-700 dark:text-blue-400'
@@ -53,7 +48,7 @@
 		: color == 'red'
 		? 'text-red-700 dark:text-red-400'
 		: 'text-black dark:text-white'}
-    {isCurrent(href) || disabled
+    {($page.route.id == href && noHash($page.url.hash, href)) || disabled
 		? 'bg-opacity-5 dark:bg-opacity-5'
 		: 'bg-opacity-0 dark:bg-opacity-0 hover:bg-opacity-20 active:bg-opacity-40 dark:hover:bg-opacity-20 dark:active:bg-opacity-40'}    
   "

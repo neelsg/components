@@ -21,23 +21,25 @@
 		<div style="width: {labelSize}%">{label}</div>
 	{/if}
 	<div
-		class="w-full {align == 'center'
-			? 'flex justify-center'
+		class="w-full flex {align == 'center'
+			? 'justify-center'
 			: align == 'right'
-			? 'flex justify-end'
-			: ''}"
+			? 'justify-end'
+			: 'justify-start'}"
 	>
 		<button
 			on:click|preventDefault|stopPropagation={click}
 			class="border rounded w-8 py-1 flex justify-center transition-colors
         {disabled
-				? 'border-stone-400 dark:border-stone-600 bg-transparent'
-				: 'bg-white dark:bg-stone-800 border-stone-800 dark:border-stone-200 hover:bg-stone-200 dark:hover:bg-stone-700'}
-        {!value
-				? 'text-stone-300 dark:text-stone-600'
+				? 'border-stone-400 dark:border-stone-700'
+				: 'border-stone-900 dark:border-stone-200'}
+        {value
+				? disabled
+					? 'bg-stone-500 dark:bg-stone-800 text-white dark:text-stone-400'
+					: 'bg-teal-700 text-white hover:bg-teal-500'
 				: disabled
-				? 'text-stone-500 dark:text-stone-500'
-				: 'text-black dark:text-white'}
+				? 'bg-transparent text-stone-600 dark:text-stone-400'
+				: 'bg-white dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-black dark:text-white'}
       "
 			type="button"
 			id={name}

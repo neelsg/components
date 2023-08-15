@@ -26,21 +26,20 @@
 			},
 			navigate: async (url: string): Promise<void> => {
 				if (url[0] != '/' && url[0] != '#') {
+					// this is an external link
 					window.location.href = url;
 					return;
 				}
 				if (url[0] == '#') {
+					// this links to the current page
 					document.body.scrollTop = 0;
 					document.documentElement.scrollTop = 0;
 					if (get(page).url.toString().indexOf('#') == -1) {
 						window.location.replace('#');
 					}
 				}
-				const current = get(page).url.pathname + (get(page).url.hash || '#');
-				const target =
-					url[0] == '#' ? get(page).url.pathname + url : url + (url.indexOf('#') == -1) ? '#' : '';
-				if (current == target) return;
 				if (url.indexOf('#') != -1) {
+					// the goto() function doesn't seem to play well with # urls
 					window.location.href = url;
 					return;
 				}
