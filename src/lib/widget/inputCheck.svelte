@@ -14,14 +14,20 @@
 		value = !value;
 		setTimeout(() => dispatch('input'), 1);
 	};
+
+	let windowWidth: number = 0;
 </script>
 
-<label class="w-full flex items-center">
+<svelte:window bind:innerWidth={windowWidth} />
+
+<label class="w-full flex items-start">
 	{#if label}
-		<div style="width: {labelSize}%">{label}</div>
+		<div style="width: {windowWidth < 640 ? 100 : labelSize}%" class="py-1 pr-1">
+			{label}
+		</div>
 	{/if}
 	<div
-		class="w-full flex {align == 'center'
+		class="sm:w-full flex {align == 'center'
 			? 'justify-center'
 			: align == 'right'
 			? 'justify-end'

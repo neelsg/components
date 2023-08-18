@@ -6,6 +6,7 @@
 	export let labelSize: number = 50.0;
 	export let options: string[];
 	export let blank: string = '';
+	export let col: boolean = false;
 	export let disabled: boolean = false;
 
 	const dispatch = createEventDispatcher();
@@ -19,18 +20,28 @@
 		value = value.sort();
 		setTimeout(() => dispatch('input'), 1);
 	};
+
+	let windowWidth: number = 0;
 </script>
 
-<div class="w-full flex items-center">
+<svelte:window bind:innerWidth={windowWidth} />
+
+<div class="w-full flex flex-col sm:flex-row items-start {col ? '' : 'sm:items-center'}">
 	{#if label}
-		<div style="width: {labelSize}%">{label}</div>
+		<div style="width: {windowWidth < 640 ? 100 : labelSize}%" class="pt-1 sm:pr-1 sm:pb-1">
+			{label}
+		</div>
 	{/if}
-	<div class="flex w-full">
+	<div class="flex w-full {col ? 'flex-col' : ''}">
 		{#each options ?? [] as o, i}
 			<button
-				on:click|preventDefault={() => {toggle(o)}}
-				class="p-1 border-y border-l w-full transition-colors
-          {i == 0 ? 'rounded-l' : ''} {i == options.length - 1 ? 'rounded-r border-r' : ''}
+				on:click|preventDefault={() => {
+					toggle(o);
+				}}
+				class="p-1 w-full transition-colors
+					{col ? 'border-x border-t' : 'border-y border-l'}
+          {i == 0 ? (col ? 'rounded-t' : 'rounded-l') : ''}
+					{i == options.length - 1 ? (col ? 'rounded-b border-b' : 'rounded-r border-r') : ''}
           {disabled
 					? 'border-stone-400 dark:border-stone-700'
 					: 'border-stone-900 dark:border-stone-200'}

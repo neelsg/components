@@ -18,11 +18,17 @@
 	const input = () => {
 		setTimeout(() => dispatch('input'), 1);
 	};
+
+	let windowWidth: number = 0;
 </script>
 
-<label class="w-full flex items-center">
+<svelte:window bind:innerWidth={windowWidth} />
+
+<label class="w-full flex flex-col sm:flex-row items-start sm:items-center">
 	{#if label}
-		<div style="width: {labelSize}%">{label}</div>
+		<div style="width: {windowWidth < 640 ? 100 : labelSize}%" class="pt-1 sm:pr-1 sm:pb-1">
+			{label}
+		</div>
 	{/if}
 	<input
 		class="p-1 w-full rounded border transition-colors

@@ -152,6 +152,15 @@
 <div class="p-1 flex space-x-2">
 	<InputOption
 		bind:value={valOpt}
+		label="This one is columns instead of rows"
+		options={['A', 'B', 'C']}
+		col
+	/>
+</div>
+
+<div class="p-1 flex space-x-2">
+	<InputOption
+		bind:value={valOpt}
 		disabled
 		label="This one is disabled"
 		options={['A', 'B', 'C']}
@@ -176,6 +185,15 @@
 		bind:value={valOptMul}
 		label="This one has a label property"
 		options={['A', 'B', 'C']}
+	/>
+</div>
+
+<div class="p-1 flex space-x-2">
+	<InputOptionMulti
+		bind:value={valOptMul}
+		label="This one is columns instead of rows"
+		options={['A', 'B', 'C']}
+		col
 	/>
 </div>
 
