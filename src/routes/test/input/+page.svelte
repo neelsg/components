@@ -167,11 +167,36 @@
 	/>
 </div>
 
+<div class="p-1 flex space-x-2">
+	<InputOption
+		bind:value={valOpt}
+		label="This one has arrays as options"
+		options={[
+			['A', '1'],
+			['B', '2'],
+			['C', '3']
+		]}
+	/>
+</div>
+
+<div class="p-1 flex space-x-2">
+	<InputOption
+		bind:value={valOpt}
+		label="This one has arrays and columns"
+		col
+		options={[
+			['A', '1'],
+			['B', '2'],
+			['C', '3']
+		]}
+	/>
+</div>
+
 <div class="p-1 text-xl">Options Multi-Select</div>
 
 <div class="p-1 flex space-x-2">
 	<div class="w-1/2">
-		Value: {valOptMul}, Input count: {countOptMul}, Value type: {typeof valOptMul}
+		Value: {JSON.stringify(valOptMul)}, Input count: {countOptMul}, Value type: {typeof valOptMul}
 	</div>
 	<InputOptionMulti
 		bind:value={valOptMul}
@@ -206,6 +231,31 @@
 	/>
 </div>
 
+<div class="p-1 flex space-x-2">
+	<InputOptionMulti
+		bind:value={valOptMul}
+		label="This one has arrays as options"
+		options={[
+			['A', '1'],
+			['B', '2'],
+			['C', '3']
+		]}
+	/>
+</div>
+
+<div class="p-1 flex space-x-2">
+	<InputOptionMulti
+		bind:value={valOptMul}
+		label="This one has arrays and columns"
+		col
+		options={[
+			['A', '1'],
+			['B', '2'],
+			['C', '3']
+		]}
+	/>
+</div>
+
 <div class="p-1 text-xl">Dropdown</div>
 
 <div class="p-1 flex space-x-2">
@@ -221,6 +271,7 @@
 			['C', '3']
 		]}
 		on:input={() => countDrop++}
+		upper
 	/>
 </div>
 
@@ -234,6 +285,7 @@
 		]}
 		required
 		placeholder="This one is required..."
+		upper
 	/>
 </div>
 
@@ -248,6 +300,7 @@
 		align="right"
 		disabled
 		placeholder="This one is disabled..."
+		upper
 	/>
 </div>
 
@@ -261,5 +314,16 @@
 		]}
 		align="center"
 		label="This one has a label property"
+		upper
+	/>
+</div>
+
+<div class="p-1">
+	<InputDropdown
+		bind:value={valDrop}
+		options={['A', 'B', 'C']}
+		align="center"
+		label="This one has strings as options"
+		upper
 	/>
 </div>

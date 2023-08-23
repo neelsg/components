@@ -14,6 +14,7 @@
 	export let disabled: boolean = false;
 	export let required: boolean = false;
 	export let used: string[] = [];
+	export let upper: boolean = false;
 
 	let element: HTMLInputElement | null = null;
 	const dispatch = createEventDispatcher();
@@ -30,6 +31,9 @@
 	};
 	const input = (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
 		value = (e.target as HTMLInputElement).value;
+		if (upper) {
+			value = value.toLocaleUpperCase();
+		}
 		updateValidity(value);
 		setTimeout(() => dispatch('input'), 1);
 	};

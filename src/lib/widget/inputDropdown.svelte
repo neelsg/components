@@ -10,20 +10,21 @@
 	export let align: 'left' | 'center' | 'right' = 'left';
 	export let labelSize: number = 50.0;
 	export let placeholder: string | null = null;
-	export let options: string[][];
+	export let options: string[] | string[][];
 	export let validate: boolean = true;
 	export let form: string | null = null;
 	export let required: boolean = false;
 	export let disabled: boolean = false;
 	export let used: string[] = [];
+	export let upper: boolean = false;
 
 	const dispatch = createEventDispatcher();
 
 	let listOpen: () => void;
 	let listClose: () => void;
 
-	const click = (row: string[]) => {
-		value = row[0];
+	const click = (option: string | string[]) => {
+		value = typeof option == 'string' ? option : option[0];
 		listClose();
 		setTimeout(() => dispatch('input'), 1);
 	};
@@ -32,8 +33,8 @@
 
 	let element: HTMLInputElement;
 
-	$: valueUpdate(value);
-	const valueUpdate = (value: string) => {
+	$: updated(value);
+	const updated = (value: string) => {
 		if (!value || !validate) {
 			element?.setCustomValidity('');
 			return;
@@ -50,15 +51,28 @@
 	};
 
 	const input = () => {
-		setTimeout(() => dispatch('input'), 1);
+		setTimeout(() => {
+			if (upper) {
+				value = value.toLocaleUpperCase();
+			}
+			dispatch('input');
+		}, 1);
 	};
 
 	let filterText = '';
-	const filterRow = (row: string[], filter: string): boolean => {
+	const filter = (option: string | string[], filter: string): boolean => {
+		if (typeof option == 'string') {
+			if (used.includes(option)) return false;
+		} else if (used.includes(option[0])) {
+			return false;
+		}
 		const s = filter.toLocaleLowerCase();
 		if (!s) return true;
-		for (const c of row) {
-			if (c.toLocaleLowerCase().indexOf(s) > -1) return true;
+		if (typeof option == 'string') {
+			return option.toLocaleLowerCase().includes(s);
+		}
+		for (const col of option) {
+			if (col.toLocaleLowerCase().indexOf(s) > -1) return true;
 		}
 		return false;
 	};
@@ -132,29 +146,35 @@
 				<Input type="search" bind:value={filterText} placeholder="Filter..." />
 			</div>
 		</div>
-		<table>
-			{#each options ?? [] as row}
-				{#if filterRow(row, filterText) && !used.includes(row[0])}
-					<tr
-						on:click={() => click(row)}
-						class="cursor-pointer hover:bg-stone-200 dark:hover:bg-stone-700"
+		<div class="flex flex-col w-full">
+			{#each options ?? [] as o}
+				{#if filter(o, filterText)}
+					<button
+						type="button"
+						on:click|preventDefault|stopPropagation={() => click(o)}
+						class="flex text-left w-full hover:bg-stone-200 dark:hover:bg-stone-700"
 					>
-						{#each row as col, i}
-							<td
-								width="999"
-								class="p-2
-                  {i == 0 ? 'font-bold' : 'text-stone-600 dark:text-stone-400'}
-                "
-							>
-								{col || '-'}
-							</td>
-						{/each}
-					</tr>
+						{#if typeof o == 'string'}
+							<div class="p-2 w-full">
+								{o || '-'}
+							</div>
+						{:else}
+							{#each o as col, i}
+								<div
+									class="p-2 w-full
+										{i == 0 ? 'font-bold' : 'text-stone-600 dark:text-stone-400'}
+									"
+								>
+									{col || '-'}
+								</div>
+							{/each}
+						{/if}
+					</button>
 				{/if}
 			{:else}
 				<tr><td> No items in selection </td></tr>
 			{/each}
-		</table>
+		</div>
 	</Popup>
 </label>
 
