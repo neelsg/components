@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { fly, fade } from 'svelte/transition';
+	import { createEventDispatcher } from 'svelte';
 	import { nav, type navNode } from './nav.js';
 	import MenuNode from './_menuNode.svelte';
 	import Icon from '../widget/icon.svelte';
@@ -19,6 +20,12 @@
 		for (const i in childExpand) {
 			if (i != String(index)) childExpand[i] = false;
 		}
+	};
+
+	const dispatch = createEventDispatcher();
+	const click = (e: { detail?: { url?: string } }) => {
+		opened = false;
+		dispatch('click', { url: e.detail?.url ?? '' });
 	};
 </script>
 
@@ -64,9 +71,7 @@
 							{collapsible}
 							bind:expanded={childExpand[String(i)]}
 							on:expand={() => childExpanded(i)}
-							on:click={() => {
-								opened = false;
-							}}
+							on:click={click}
 						/>
 					{/each}
 				</div>

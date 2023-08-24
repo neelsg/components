@@ -2,6 +2,7 @@ import Crumbs from './nav/crumbs.svelte';
 import Menu from './nav/menu.svelte';
 import { nav, type navNode } from './nav/nav.js';
 import Page from './nav/page.svelte';
+import Shortcuts, { shortcuts } from './nav/shortcuts.svelte';
 import { colorBasic, colorFull } from './util/color.js';
 import Theme, { theme } from './util/theme.svelte';
 import Toast, { toast } from './util/toast.svelte';
@@ -46,6 +47,8 @@ export {
 	type navNode,
 	Page,
 	Popup,
+	Shortcuts,
+	shortcuts,
 	Theme,
 	theme,
 	Toast,

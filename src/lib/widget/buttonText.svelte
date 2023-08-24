@@ -12,7 +12,7 @@
 </script>
 
 <button
-	on:click|stopPropagation
+	on:click|stopPropagation|preventDefault
 	class="
     font-semibold flex items-center transition-colors
 		{upper ? 'uppercase' : ''}

@@ -98,14 +98,14 @@
 					<div>{node.label}</div>
 				</div>
 			</Link>
-			{#if children.length > 0 && collapsible}
+			{#if children.filter((c) => !c.iconOnly).length > 0 && collapsible}
 				<ButtonText square on:click={expand}>
 					<div class="w-12 flex justify-center">
 						<Icon key={expanded ? 'chevron-up' : 'chevron-down'} />
 					</div>
 				</ButtonText>
 			{/if}
-		{:else if collapsible}
+		{:else if collapsible && children.filter((c) => !c.iconOnly).length > 0}
 			<ButtonText square full on:click={expand}>
 				<div class="flex justify-between w-full">
 					<div class="flex">
@@ -135,23 +135,30 @@
 				</div>
 			</div>
 		{/if}
+		{#each children.filter((c) => c.iconOnly) as c}
+			<Link href={c.url ?? ''} square on:click={() => click(c.url ?? '')}>
+				<div class="w-12 flex justify-center" title={c.label}>
+					<Icon key={c.icon ?? 'no-symbol'} />
+				</div>
+			</Link>
+		{/each}
 	</div>
 {/if}
 
-{#if children.length > 0 && (expanded || !collapsible)}
+{#if children.filter((c) => !c.iconOnly).length > 0 && (expanded || !collapsible)}
 	<div
 		in:fly={{ duration: 150, y: -30 }}
 		class="
       border-t border-b border-stone-500 bg-stone-500 bg-opacity-10 flex flex-col
     "
 	>
-		{#each children as c, i}
+		{#each children.filter((c) => !c.iconOnly) as c, i}
 			<svelte:self
 				node={c}
 				{context}
 				bind:expanded={childExpand[String(i)]}
 				on:click={(e) => {
-					click(e.url);
+					click(e.detail.url);
 				}}
 				on:expand={() => childExpanded(i)}
 				{collapsible}

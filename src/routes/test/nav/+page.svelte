@@ -3,6 +3,7 @@
 	import Page from '$lib/nav/page.svelte';
 	import Menu from '$lib/nav/menu.svelte';
 	import Button from '$lib/widget/button.svelte';
+	import Shortcuts, { shortcuts } from '$lib/nav/shortcuts.svelte';
 
 	const links: navNode[] = [
 		{
@@ -14,7 +15,7 @@
 			label: 'Tests',
 			color: 'cyan',
 			children: [
-				{ label: 'Button', url: '/test/button' },
+				{ label: 'Button', url: '/test/button', iconOnly: true, icon: 'play' },
 				{ label: 'Card', url: '/test/card', color: 'orange' },
 				{ label: 'Icon', url: '/test/icon' },
 				{ label: 'Image', url: '/test/image', color: 'purple' },
@@ -29,6 +30,7 @@
 		{
 			label: 'Other',
 			url: '/nowhere',
+			icon: 'adjustments-horizontal',
 			children: [
 				{
 					label: 'Button',
@@ -77,7 +79,14 @@
 	]}
 >
 	<Button on:click={openMenu}>Open Menu</Button>
-	<Menu bind:open={openMenu} collapsible nodes={links}>
+	<Menu
+		bind:open={openMenu}
+		collapsible
+		nodes={links}
+		on:click={(e) => shortcuts.add(e.detail.url)}
+	>
 		<div slot="footer">Put your footer here</div>
 	</Menu>
+
+	<Shortcuts nodes={links} />
 </Page>
