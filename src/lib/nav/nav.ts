@@ -54,7 +54,15 @@ export const nav = {
 		// Filter out any nodes that should be hidden and remove any URLs that are not on the list. This is useful for shortcuts
 		const visible = nav.getVisible(nodes, context);
 		const cleared = visible.map((n): navNode => {
-			const node = JSON.parse(JSON.stringify(n));
+			const node = {
+				label: n.label,
+				url: n.url,
+				icon: n.icon,
+				color: n.color,
+				children: n.children,
+				hide: n.hide,
+				iconOnly: n.iconOnly
+			};
 			if (node.url && !urls.includes(node.url)) delete node.url;
 			if (node.children) node.children = nav.getFromUrls(urls, node.children, context);
 			return node;

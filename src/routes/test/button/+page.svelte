@@ -8,6 +8,11 @@
 	const texts = [false, true] as const;
 	const compacts = [false, true] as const;
 	let clicks = [0, 0, 0, 0, 0];
+
+	let toggled = false;
+	const toggle = () => {
+		toggled = !toggled;
+	};
 </script>
 
 <div>
@@ -55,3 +60,9 @@
 		{/each}
 	{/each}
 </div>
+
+<form on:submit|preventDefault={toggle}>
+	<Button type="submit">
+		{toggled}
+	</Button>
+</form>

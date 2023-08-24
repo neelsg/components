@@ -12,6 +12,9 @@
 	export const open = () => {
 		opened = true;
 	};
+	export const close = () => {
+		opened = false;
+	};
 
 	let opened: boolean = false;
 

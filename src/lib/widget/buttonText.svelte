@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { colorBasic } from '../util/color.js';
+	import { createEventDispatcher } from 'svelte';
 
 	export let color: (typeof colorBasic)[number] = null;
 	export let type: 'button' | 'reset' | 'submit' | null = 'button';
@@ -9,10 +10,16 @@
 	export let compact: boolean = false;
 	export let disabled: boolean = false;
 	export let upper: boolean = true;
+
+	const dispatch = createEventDispatcher();
+	const click = (e: Event) => {
+		if (type != 'reset' && type != 'submit') e.preventDefault();
+		dispatch('click', {});
+	};
 </script>
 
 <button
-	on:click|stopPropagation|preventDefault
+	on:click|stopPropagation={click}
 	class="
     font-semibold flex items-center transition-colors
 		{upper ? 'uppercase' : ''}

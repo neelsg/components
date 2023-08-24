@@ -93,7 +93,7 @@
 	{#if node.url}
 		<div class="w-80 p-1">
 			<Card color={node.color ?? null} href={node.url} compact>
-				<div class="w-full flex items-center">
+				<div class="w-full flex items-center py-1">
 					<div class="w-10 flex justify-end">
 						{#if node.icon}<Icon key={node.icon} />{/if}
 					</div>
