@@ -60,6 +60,7 @@
 						on:click={() => {
 							opened = false;
 						}}
+						full
 					>
 						<div class="flex space-x-2 w-full justify-between pl-4 pr-3">
 							<Icon key="bars-3" />

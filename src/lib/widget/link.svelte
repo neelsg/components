@@ -28,7 +28,7 @@
 	};
 </script>
 
-<div class={space ? 'p-1' : ''}>
+<div class="{full ? 'w-full' : ''} {space ? 'p-1' : ''}">
 	<a
 		{href}
 		on:click|preventDefault|stopPropagation={click}
