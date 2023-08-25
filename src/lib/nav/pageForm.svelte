@@ -21,16 +21,24 @@
   "
 >
 	<form on:submit|preventDefault>
-		<div class="my-2 items-center flex flex-wrap">
-			<ButtonText
-				color="blue"
-				on:click={() => {
-					window.history.back();
-				}}
-			>
-				<Icon key="chevron-left" />
-			</ButtonText>
-			<Crumbs prepend={[{ label: '', icon: 'home', url: '/' }]} {nodes} {node} {append} {context} />
+		<div class="items-center flex flex-wrap justify-between">
+			<div class="my-2 items-center flex flex-wrap">
+				<ButtonText
+					color="blue"
+					on:click={() => {
+						window.history.back();
+					}}
+				>
+					<Icon key="chevron-left" />
+				</ButtonText>
+				<Crumbs
+					prepend={[{ label: '', icon: 'home', url: '/' }]}
+					{nodes}
+					{node}
+					{append}
+					{context}
+				/>
+			</div>
 			<slot name="top" />
 		</div>
 		<slot />

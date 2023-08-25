@@ -11,9 +11,10 @@
 <svelte:window bind:innerWidth={width} />
 
 <div
-	class="{heading
-		? 'text-xl pb-1 px-0.5'
-		: 'p-0.5 text-sm'} font-semibold flex space-x-1 items-center"
+	class="
+		p-0.5 flex space-x-1 items-center
+		{heading ? 'text-lg font-semibold' : 'text-sm'}
+	"
 >
 	{#if node.icon && (width > 800 || (!node.label && !node.labelShort))}
 		<Icon key={node.icon} />

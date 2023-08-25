@@ -13,15 +13,20 @@
 	on:submit={submitted}
 	nodes={[
 		{
-			icon: 'truck',
-			label: 'Test Looong',
-			labelShort: 'Tst Shrt',
-			url: '/test',
-			children: [{ label: 'Test Page', url: '/test/page' }]
+			label: 'Teeessst',
+			children: [
+				{
+					icon: 'truck',
+					label: 'Test Looong',
+					labelShort: 'Tst Shrt',
+					url: '/test',
+					children: [{ label: 'Test Page', url: '/test/page', icon: 'academic-cap' }]
+				}
+			]
 		}
 	]}
 >
-	<div class="px-1 flex" slot="top">
+	<div class="flex flex-wrap" slot="top">
 		<Button type="submit" space>Submit</Button>
 		<Button space>Cancel</Button>
 	</div>
