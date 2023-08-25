@@ -19,7 +19,7 @@
 
 {#each nodes as n, i}
 	{#if i == nodes.length - 1}
-		<div class="text-xl font-semibold pb-1">{n.label}</div>
+		<CrumbText node={n} heading />
 	{:else}
 		<div class="flex items-center">
 			{#if n.url}
@@ -27,7 +27,7 @@
 					<CrumbText node={n} />
 				</Link>
 			{:else}
-				<div class="font-semibold flex items-center"><CrumbText node={n} /></div>
+				<CrumbText node={n} />
 			{/if}
 			<div class="p-1 text-stone-500">/</div>
 		</div>

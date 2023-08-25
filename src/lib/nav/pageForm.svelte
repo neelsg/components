@@ -12,9 +12,8 @@
 </script>
 
 <div
-	class="
-		{!size ? 'px-1' : ''}
-    {size == 3 ? 'max-w-3xl mx-auto' : ''}
+	class="px-1
+		{size == 3 ? 'max-w-3xl mx-auto' : ''}
     {size == 4 ? 'max-w-4xl mx-auto' : ''}
     {size == 5 ? 'max-w-5xl mx-auto' : ''}
     {size == 6 ? 'max-w-6xl mx-auto' : ''}

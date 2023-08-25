@@ -10,6 +10,7 @@
 	export let rows: number = 5;
 	export let disabled: boolean = false;
 	export let required: boolean = false;
+	export let space: boolean = false;
 
 	const dispatch = createEventDispatcher();
 	const input = () => {
@@ -21,7 +22,7 @@
 
 <svelte:window bind:innerWidth={windowWidth} />
 
-<label class="w-full flex flex-col sm:flex-row items-start">
+<label class="w-full flex flex-col sm:flex-row items-start {space ? 'p-1' : ''}">
 	{#if label}
 		<div style="width: {windowWidth < 640 ? 100 : labelSize}%" class="pt-1 sm:pr-1 sm:pb-1">
 			{label}

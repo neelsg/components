@@ -16,15 +16,17 @@
 			icon: 'truck',
 			label: 'Test Looong',
 			labelShort: 'Tst Shrt',
+			url: '/test',
 			children: [{ label: 'Test Page', url: '/test/page' }]
 		}
 	]}
 >
-	<div class="px-1" slot="top">
-		<Button type="submit">Submit</Button>
+	<div class="px-1 flex" slot="top">
+		<Button type="submit" space>Submit</Button>
+		<Button space>Cancel</Button>
 	</div>
-	<Input required value="" />
+	<Input required value="" space />
 	<div slot="bottom">
-		<Input required value="" />
+		<Input required value="" space />
 	</div>
 </PageForm>

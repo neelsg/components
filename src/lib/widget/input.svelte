@@ -15,6 +15,7 @@
 	export let required: boolean = false;
 	export let used: string[] = [];
 	export let upper: boolean = false;
+	export let space: boolean = false;
 
 	let element: HTMLInputElement | null = null;
 	const dispatch = createEventDispatcher();
@@ -43,7 +44,7 @@
 
 <svelte:window bind:innerWidth={windowWidth} />
 
-<label class="w-full flex flex-col sm:flex-row items-start sm:items-center">
+<label class="w-full flex flex-col sm:flex-row items-start sm:items-center {space ? 'p-1' : ''}">
 	{#if label}
 		<div style="width: {windowWidth < 640 ? 100 : labelSize}%" class="pt-1 sm:pr-1 sm:pb-1">
 			{label}

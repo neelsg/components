@@ -8,6 +8,7 @@
 	export let blank: string = '';
 	export let col: boolean = false;
 	export let disabled: boolean = false;
+	export let space: boolean = false;
 
 	const dispatch = createEventDispatcher();
 	const click = (option: string) => {
@@ -20,7 +21,11 @@
 
 <svelte:window bind:innerWidth={windowWidth} />
 
-<div class="w-full flex flex-col sm:flex-row items-start {col ? '' : 'sm:items-center'}">
+<div
+	class="w-full flex flex-col sm:flex-row items-start {space ? 'p-1' : ''} {col
+		? ''
+		: 'sm:items-center'}"
+>
 	{#if label}
 		<div style="width: {windowWidth < 640 ? 100 : labelSize}%" class="pt-1 sm:pr-1 sm:pb-1">
 			{label}

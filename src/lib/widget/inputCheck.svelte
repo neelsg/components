@@ -8,6 +8,7 @@
 	export let align: 'left' | 'center' | 'right' = 'left';
 	export let labelSize: number = 50.0;
 	export let disabled: boolean = false;
+	export let space: boolean = false;
 
 	const dispatch = createEventDispatcher();
 	const click = () => {
@@ -20,7 +21,7 @@
 
 <svelte:window bind:innerWidth={windowWidth} />
 
-<label class="w-full flex items-start">
+<label class="w-full flex items-start {space ? 'p-1' : ''}">
 	{#if label}
 		<div style="width: {windowWidth < 640 ? 100 : labelSize}%" class="py-1 pr-1">
 			{label}
