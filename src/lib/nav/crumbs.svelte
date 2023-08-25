@@ -5,16 +5,21 @@
 	import CrumbText from './_crumbText.svelte';
 
 	export let nodes: navNode[];
+	export let node: string | null = null;
 	export let prepend: navNode[] = [];
 	export let append: navNode[] = [];
 	export let context: unknown = false;
 
-	$: nodes = [...prepend, ...(nav.getAncestors($page.route.id, nodes, context) ?? []), ...append];
+	$: nodes = [
+		...prepend,
+		...(nav.getAncestors(node || $page.route.id, nodes, context) ?? []),
+		...append
+	];
 </script>
 
 {#each nodes as n, i}
 	{#if i == nodes.length - 1}
-		<div class="p-1 text-xl font-semibold">{n.label}</div>
+		<div class="text-xl font-semibold pb-1">{n.label}</div>
 	{:else}
 		<div class="flex items-center">
 			{#if n.url}

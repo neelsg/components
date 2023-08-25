@@ -3,12 +3,13 @@ import type { colorFull } from '../util/color.js';
 
 export type navNode = {
 	label: string;
+	labelShort?: string;
 	url?: string;
 	icon?: keyof typeof iconPaths;
+	iconOnly?: boolean;
 	color?: (typeof colorFull)[number];
 	children?: navNode[];
 	hide?: (context: unknown) => boolean;
-	iconOnly?: boolean;
 	[key: string]: unknown;
 };
 

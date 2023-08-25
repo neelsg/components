@@ -12,3 +12,4 @@
 <Link color="blue" href="/test/image">Test Image</Link>
 <Link color="blue" href="/test/card">Test Card</Link>
 <Link color="blue" href="/test/nav">Test Nav</Link>
+<Link color="blue" href="/test/page">Test Page</Link>

@@ -3,12 +3,19 @@
 	import Icon from '../widget/icon.svelte';
 
 	export let node: navNode;
+
+	let width: number = 0;
 </script>
 
-{#if node.label}
-	<div class="p-0.5 text-sm">{node.label}</div>
-{:else}
-	<div class="p-0.5">
-		<Icon key={node.icon ?? 'x-circle'} />
-	</div>
-{/if}
+<svelte:window bind:innerWidth={width} />
+
+<div class="p-0.5 text-sm flex space-x-1 items-center">
+	{#if node.icon && (width > 640 || (!node.label && !node.labelShort))}
+		<Icon key={node.icon} />
+	{/if}
+	{#if node.labelShort && width <= 640}
+		<div>{node.labelShort}</div>
+	{:else if node.label}
+		<div>{node.label}</div>
+	{/if}
+</div>
