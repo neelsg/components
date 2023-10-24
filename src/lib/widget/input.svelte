@@ -1,21 +1,28 @@
+<!--
+Text input
+
+@events
+- input: whenever the user changes the value
+-->
+
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
-	export let value: string;
-	export let label: string | null = null;
-	export let name: string | null = null;
+	export let value: string; // bind this to get the input value
+	export let label: string | null = null; // this is displayed if not null
+	export let name: string | null = null; // can use to associate an external label to this input
 	export let type: 'text' | 'email' | 'date' | 'password' | 'search' | 'tel' | 'time' | 'url' =
-		'text';
-	export let align: 'left' | 'center' | 'right' = 'left';
-	export let labelSize: number = 50.0;
-	export let placeholder: string | null = null;
-	export let pattern: string | null = null;
-	export let form: string | null = null;
-	export let disabled: boolean = false;
-	export let required: boolean = false;
-	export let used: string[] = [];
-	export let upper: boolean = false;
-	export let space: boolean = false;
+		'text'; // browsers may have different behaviours and validations based on input type
+	export let align: 'left' | 'center' | 'right' = 'left'; // alignment of the value in the input
+	export let labelSize: number = 50.0; // only applicable if label is not null. input is 100, so 50 is 1/3
+	export let placeholder: string | null = null; // placeholder if value is empty
+	export let pattern: string | null = null; // regex for validation
+	export let form: string | null = null; // associate this input with a form if not nested under it
+	export let disabled: boolean = false; // disable the input
+	export let required: boolean = false; // make the input required
+	export let used: string[] = []; // use to validate that you don't have duplicates
+	export let upper: boolean = false; // automatically make input value uppercase
+	export let space: boolean = false; // add some padding around the input
 
 	let element: HTMLInputElement | null = null;
 	const dispatch = createEventDispatcher();

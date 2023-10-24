@@ -1,5 +1,9 @@
+<!--
+A link to an email address
+-->
+
 <script lang="ts">
-	export let href: string;
+	export let href: string; // the email address to link to
 </script>
 
 <a

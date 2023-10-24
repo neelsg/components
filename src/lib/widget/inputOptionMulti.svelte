@@ -1,14 +1,21 @@
+<!--
+Like InputOption, but the user can select multiple options. The value is an array of the selected options
+
+@events
+- input: whenever the user changes the value
+-->
+
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
-	export let value: string[] = [];
-	export let label: string | null = null;
-	export let labelSize: number = 50.0;
-	export let options: string[] | string[][];
-	export let blank: string = '';
-	export let col: boolean = false;
-	export let disabled: boolean = false;
-	export let space: boolean = false;
+	export let value: string[] = []; // bind this to get the input value
+	export let label: string | null = null; // this is displayed if not null
+	export let labelSize: number = 50.0; // only applicable if label is not null. input is 100, so 50 is 1/3
+	export let options: string[] | string[][]; // a list of possible values with either a simple array or a tabular layout. for tabular the first column of each row is the actual value
+	export let blank: string = ''; // the value to display if the actual value is ''
+	export let col: boolean = false; // show values in a column rather than next to each other
+	export let disabled: boolean = false; // disable the input
+	export let space: boolean = false; // add some padding around the input
 
 	const dispatch = createEventDispatcher();
 	const click = (option: string) => {

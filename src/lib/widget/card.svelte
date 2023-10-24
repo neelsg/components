@@ -1,12 +1,19 @@
+<!--
+A raised box that links to some url. This is essentially a glorified anchor tag
+
+@events
+- click: whenever the card is clicked
+-->
+
 <script lang="ts">
 	import type { colorFull } from '../util/color.js';
 	import { wait } from '../util/wait.svelte';
 	import { createEventDispatcher } from 'svelte';
 
-	export let href: string;
-	export let color: (typeof colorFull)[number] = null;
-	export let col: boolean = false;
-	export let compact: boolean = false;
+	export let href: string; // the url to link to
+	export let color: (typeof colorFull)[number] = null; // the border color of the card
+	export let col: boolean = false; // set flex-col. by default it is flex-row
+	export let compact: boolean = false; // remove any padding from the card
 
 	const dispatch = createEventDispatcher();
 	const click = () => {

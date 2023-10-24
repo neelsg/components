@@ -1,3 +1,7 @@
+<!--
+Displays any icon from heroicons.com
+-->
+
 <script lang="ts" context="module">
 	/*
     SVG Icons from https://heroicons.com/
@@ -802,8 +806,8 @@
 </script>
 
 <script lang="ts">
-	export let key: keyof typeof iconPaths;
-	export let size: number = 24;
+	export let key: keyof typeof iconPaths; // the name of the icon that should be displayed
+	export let size: number = 24; // the size in px
 </script>
 
 <svg

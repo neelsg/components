@@ -14,6 +14,7 @@ import Card from './widget/card.svelte';
 import Icon, { iconPaths } from './widget/icon.svelte';
 import Image from './widget/image.svelte';
 import Input from './widget/input.svelte';
+import InputBinary from './widget/inputBinary.svelte';
 import InputCheck from './widget/inputCheck.svelte';
 import InputDropdown from './widget/inputDropdown.svelte';
 import InputNumber from './widget/inputNumber.svelte';
@@ -22,7 +23,9 @@ import InputOptionMulti from './widget/inputOptionMulti.svelte';
 import InputText from './widget/inputText.svelte';
 import Link from './widget/link.svelte';
 import LinkMail from './widget/linkMail.svelte';
+import Movable from './widget/movable.svelte';
 import Popup from './widget/popup.svelte';
+import Zoomable from './widget/zoomable.svelte';
 
 export {
 	Button,
@@ -35,6 +38,7 @@ export {
 	iconPaths,
 	Image,
 	Input,
+	InputBinary,
 	InputCheck,
 	InputDropdown,
 	InputNumber,
@@ -44,6 +48,7 @@ export {
 	Link,
 	LinkMail,
 	Menu,
+	Movable,
 	nav,
 	type navNode,
 	Page,
@@ -56,5 +61,6 @@ export {
 	Toast,
 	toast,
 	Wait,
-	wait
+	wait,
+	Zoomable
 };

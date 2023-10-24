@@ -1,23 +1,30 @@
+<!--
+An input box with a popup that will display the available values
+
+@events
+- input: whenever the user changes the value
+-->
+
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import Icon from './icon.svelte';
 	import Popup from './popup.svelte';
 	import Input from './input.svelte';
 
-	export let value: string = '';
-	export let label: string | null = null;
-	export let name: string | null = null;
-	export let align: 'left' | 'center' | 'right' = 'left';
-	export let labelSize: number = 50.0;
-	export let placeholder: string | null = null;
-	export let options: string[] | string[][];
-	export let validate: boolean = true;
-	export let form: string | null = null;
-	export let required: boolean = false;
-	export let disabled: boolean = false;
-	export let used: string[] = [];
-	export let upper: boolean = false;
-	export let space: boolean = false;
+	export let value: string = ''; // bind this to get the current value
+	export let label: string | null = null; // display a label for the input
+	export let name: string | null = null; // set the name attribute on the input element
+	export let align: 'left' | 'center' | 'right' = 'left'; // set the alignment of the value within the input
+	export let labelSize: number = 50.0; // only applicable if label is not null
+	export let placeholder: string | null = null; // set a placeholder if the value is empty
+	export let options: string[] | string[][]; // a list of possible values with a tabular layout. the first column of each row is the actual value
+	export let validate: boolean = true; // limit the possible values to the options list
+	export let form: string | null = null; // associate the input with a form if not nested under it
+	export let required: boolean = false; // make the input required
+	export let disabled: boolean = false; // disable input
+	export let used: string[] = []; // use to validate that you don't have duplicates
+	export let upper: boolean = false; // automatically make input value uppercase
+	export let space: boolean = false; // add some padding around the input
 
 	const dispatch = createEventDispatcher();
 

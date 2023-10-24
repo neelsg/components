@@ -1,14 +1,21 @@
+<!--
+An input checkbox
+
+@events
+- input: whenever the user changes the value
+-->
+
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import Icon from './icon.svelte';
 
-	export let value: boolean;
-	export let label: string | null = null;
-	export let name: string | null = null;
-	export let align: 'left' | 'center' | 'right' = 'left';
-	export let labelSize: number = 50.0;
-	export let disabled: boolean = false;
-	export let space: boolean = false;
+	export let value: boolean; // bind this to get the value
+	export let label: string | null = null; // display a label for the checkbox
+	export let name: string | null = null; // set the name of the input element
+	export let align: 'left' | 'center' | 'right' = 'left'; // align the checkbox in the available area
+	export let labelSize: number = 50.0; // only applicable if label is not null
+	export let disabled: boolean = false; // disable input
+	export let space: boolean = false; // add some padding around the checkbox
 
 	const dispatch = createEventDispatcher();
 	const click = () => {

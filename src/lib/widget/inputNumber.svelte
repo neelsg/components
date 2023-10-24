@@ -1,19 +1,26 @@
+<!--
+Numeric input
+
+@events
+- input: whenever the user changes the value
+-->
+
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
-	export let value: number;
-	export let label: string = '';
-	export let name: string | null = null;
-	export let align: 'left' | 'center' | 'right' = 'left';
-	export let labelSize: number = 50.0;
-	export let placeholder: string | null = null;
-	export let step: number = 0.0001;
-	export let min: number | null = null;
-	export let max: number | null = null;
-	export let form: string | null = null;
-	export let disabled: boolean = false;
-	export let required: boolean = false;
-	export let space: boolean = false;
+	export let value: number; // bind this to get the input value
+	export let label: string | null = null; // this is displayed if not null
+	export let name: string | null = null; // can use to associate an external label to this input
+	export let align: 'left' | 'center' | 'right' = 'left'; // alignment of the value in the input
+	export let labelSize: number = 50.0; // only applicable if label is not null. input is 100, so 50 is 1/3
+	export let placeholder: string | null = null; // placeholder if value is empty
+	export let step: number = 0.0001; // minimum step size between values
+	export let min: number | null = null; // minimum value allowed
+	export let max: number | null = null; // maximum value allowed
+	export let form: string | null = null; // associate this input with a form if not nested under it
+	export let disabled: boolean = false; // disable the input
+	export let required: boolean = false; // make the input required
+	export let space: boolean = false; // add some padding around the input
 
 	const dispatch = createEventDispatcher();
 	const input = () => {

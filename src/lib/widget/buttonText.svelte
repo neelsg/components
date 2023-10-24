@@ -1,16 +1,23 @@
+<!--
+A button presented as text with no background or border unless hovered
+
+@events
+- click: whenever the button is clicked
+-->
+
 <script lang="ts">
 	import type { colorBasic } from '../util/color.js';
 	import { createEventDispatcher } from 'svelte';
 
-	export let color: (typeof colorBasic)[number] = null;
-	export let type: 'button' | 'reset' | 'submit' | null = 'button';
-	export let form: string | null = null;
-	export let square: true | 'right' | 'left' | false = false;
-	export let full: boolean = false;
-	export let compact: boolean = false;
-	export let disabled: boolean = false;
-	export let upper: boolean = true;
-	export let space: boolean = false;
+	export let color: (typeof colorBasic)[number] = null; // set the color of the button
+	export let type: 'button' | 'reset' | 'submit' | null = 'button'; // any type that a typical html button can be
+	export let form: string | null = null; // the form if any that is associated with this button
+	export let square: true | 'right' | 'left' | false = false; // make the button corners sharp instead of the default rounded
+	export let full: boolean = false; // set w-full for the button
+	export let compact: boolean = false; // remove any padding from the button
+	export let disabled: boolean = false; // disable the button
+	export let upper: boolean = true; // make button text uppercase. true by default
+	export let space: boolean = false; // add some padding around the button
 
 	const dispatch = createEventDispatcher();
 	const click = (e: Event) => {

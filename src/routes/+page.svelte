@@ -13,3 +13,6 @@
 <Link color="blue" href="/test/card">Test Card</Link>
 <Link color="blue" href="/test/nav">Test Nav</Link>
 <Link color="blue" href="/test/page">Test Page</Link>
+<Link color="blue" href="/test/movable">Test Movable</Link>
+<Link color="blue" href="/test/binary">Test Binary</Link>
+<Link color="blue" href="/test/zoomable">Test Zoomable</Link>

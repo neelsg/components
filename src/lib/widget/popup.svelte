@@ -1,3 +1,10 @@
+<!--
+A modal popup
+
+@events
+- closed: if the popup is closed for any reason
+-->
+
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import { fade } from 'svelte/transition';
@@ -6,12 +13,12 @@
 
 	export const open = () => {
 		opened = true;
-	};
+	}; // bind to this function in order to open the popup from the parent component
 
 	export const close = () => {
 		opened = false;
 		dispatch('closed', {});
-	};
+	}; // bind to this function in order to close the popup from the parent component
 
 	const dispatch = createEventDispatcher();
 

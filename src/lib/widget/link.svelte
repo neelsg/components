@@ -1,17 +1,24 @@
+<!--
+An anchor tag with relevant styling applied
+
+@events
+- click: whenever the link is clicked
+-->
+
 <script lang="ts">
 	import type { colorBasic } from '../util/color.js';
 	import { page } from '$app/stores';
 	import { createEventDispatcher } from 'svelte';
 	import { wait } from '../util/wait.svelte';
 
-	export let color: (typeof colorBasic)[number] = null;
-	export let href: string;
-	export let square: true | 'right' | 'left' | false = false;
-	export let full: boolean = false;
-	export let compact: boolean = false;
-	export let disabled: boolean = false;
-	export let upper: boolean = true;
-	export let space: boolean = false;
+	export let color: (typeof colorBasic)[number] = null; // null | blue | green | yellow | red
+	export let href: string; // href property of the anchor tag
+	export let square: true | 'right' | 'left' | false = false; // make the link corners sharp instead of the default rounded
+	export let full: boolean = false; // set w-full for the link
+	export let compact: boolean = false; // remove any padding from the link
+	export let disabled: boolean = false; // disable the link
+	export let upper: boolean = true; // make link text uppercase
+	export let space: boolean = false; // add some padding around the link
 
 	const dispatch = createEventDispatcher();
 	const click = () => {
