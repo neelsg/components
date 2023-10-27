@@ -12,7 +12,7 @@
 		<Link color={c} href="#">Normal</Link>
 		<Link color={c} href="/test/link">This Page</Link>
 		<Link color={c} href="/" disabled>Disabled</Link>
-		<Link color={c} square href="/some/other/page">Square</Link>
+		<Link color={c} square href="/">Square</Link>
 		<Link color={c} compact href="/test/link#d">Compact</Link>
 	</div>
 {/each}

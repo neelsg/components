@@ -1,6 +1,6 @@
 import Crumbs from './nav/crumbs.svelte';
 import Menu from './nav/menu.svelte';
-import { nav, type navNode } from './nav/nav.js';
+import { nav } from './nav/nav.js';
 import Page from './nav/page.svelte';
 import PageForm from './nav/pageForm.svelte';
 import Shortcuts, { shortcuts } from './nav/shortcuts.svelte';
@@ -50,7 +50,6 @@ export {
 	Menu,
 	Movable,
 	nav,
-	type navNode,
 	Page,
 	PageForm,
 	Popup,

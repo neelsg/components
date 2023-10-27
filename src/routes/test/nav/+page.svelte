@@ -70,12 +70,15 @@
 	let openMenu: () => void;
 </script>
 
+<div id="a1" />
+<div id="a2" />
+
 <Page
 	size={5}
 	nodes={links}
 	append={[
-		{ label: 'Apnd 1', url: 'a1' },
-		{ label: 'Apnd 2', url: 'a2' }
+		{ label: 'Apnd 1', url: '#a1' },
+		{ label: 'Apnd 2', url: '#a2' }
 	]}
 >
 	<Button on:click={openMenu}>Open Menu</Button>
