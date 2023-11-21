@@ -1,8 +1,5 @@
 <script lang="ts">
-	import PageForm from '$lib/nav/pageForm.svelte';
-	import Input from '$lib/widget/input.svelte';
-	import Button from '$lib/widget/button.svelte';
-	import { toast } from '$lib/util/toast.svelte';
+	import { toast, PageForm, Input, Button } from '$lib';
 
 	const submitted = () => {
 		toast.add('Form submitted', 'blue');

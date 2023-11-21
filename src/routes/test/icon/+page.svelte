@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Icon, { iconPaths } from '$lib/widget/icon.svelte';
+	import { Icon, iconPaths } from '$lib';
 
 	const keys = Object.keys(iconPaths) as (keyof typeof iconPaths)[];
 </script>

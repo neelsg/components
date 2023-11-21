@@ -1,3 +1,6 @@
+import Error from './layout/error.svelte';
+import Header from './layout/header.svelte';
+import Layout from './layout/layout.svelte';
 import Crumbs from './nav/crumbs.svelte';
 import Menu from './nav/menu.svelte';
 import { nav, type navNode } from './nav/nav.js';
@@ -34,6 +37,8 @@ export {
 	colorBasic,
 	colorFull,
 	Crumbs,
+	Error,
+	Header,
 	Icon,
 	iconPaths,
 	Image,
@@ -45,6 +50,7 @@ export {
 	InputOption,
 	InputOptionMulti,
 	InputText,
+	Layout,
 	Link,
 	LinkMail,
 	Menu,

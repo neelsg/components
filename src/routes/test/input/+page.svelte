@@ -1,11 +1,13 @@
 <script lang="ts">
-	import Input from '$lib/widget/input.svelte';
-	import InputText from '$lib/widget/inputText.svelte';
-	import InputCheck from '$lib/widget/inputCheck.svelte';
-	import InputNumber from '$lib/widget/inputNumber.svelte';
-	import InputOption from '$lib/widget/inputOption.svelte';
-	import InputOptionMulti from '$lib/widget/inputOptionMulti.svelte';
-	import InputDropdown from '$lib/widget/inputDropdown.svelte';
+	import {
+		Input,
+		InputText,
+		InputCheck,
+		InputNumber,
+		InputOption,
+		InputOptionMulti,
+		InputDropdown
+	} from '$lib';
 
 	let val = '';
 	let valText = '';

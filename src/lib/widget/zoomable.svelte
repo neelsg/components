@@ -4,8 +4,8 @@ as moved around like a map
 -->
 
 <script lang="ts">
-	import ButtonText from '$lib/widget/buttonText.svelte';
-	import Icon from '$lib/widget/icon.svelte';
+	import ButtonText from './buttonText.svelte';
+	import Icon from './icon.svelte';
 
 	export let x: number = 0; // x position of contents
 	export let y: number = 0; // y position of contents

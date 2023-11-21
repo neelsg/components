@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Image from '$lib/widget/image.svelte';
+	import { Image } from '$lib';
 </script>
 
 <div class="flex space-x-2">

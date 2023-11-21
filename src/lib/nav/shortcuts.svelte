@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import { writable, get, type Writable } from 'svelte/store';
+	import { writable, type Writable } from 'svelte/store';
 	import { wait } from '../util/wait.svelte';
 	import ShortcutNode from './_shortcutNode.svelte';
 

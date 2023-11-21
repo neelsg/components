@@ -1,6 +1,5 @@
 <script lang="ts">
-	import Button from '$lib/widget/button.svelte';
-	import Popup from '$lib/widget/popup.svelte';
+	import { Button, Popup } from '$lib';
 
 	let popOpen: () => void;
 	let popClose: () => void;

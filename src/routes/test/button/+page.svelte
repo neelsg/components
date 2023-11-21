@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { colorBasic } from '$lib/util/color.js';
-	import Button from '$lib/widget/button.svelte';
-	import ButtonText from '$lib/widget/buttonText.svelte';
+	import { colorBasic, Button, ButtonText } from '$lib';
 
 	const disableds = [false, true] as const;
 	const squares = [false, true] as const;

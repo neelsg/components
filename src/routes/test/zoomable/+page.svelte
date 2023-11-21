@@ -1,6 +1,5 @@
 <script lang="ts">
-	import Zoomable from '$lib/widget/zoomable.svelte';
-	import Movable from '$lib/widget/movable.svelte';
+	import { Zoomable, Movable } from '$lib';
 
 	let scale = 1;
 </script>

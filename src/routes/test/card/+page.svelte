@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { colorFull } from '$lib/util/color.js';
-	import Card from '$lib/widget/card.svelte';
+	import { colorFull, Card } from '$lib';
 </script>
 
 {#each colorFull as c}

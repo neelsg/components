@@ -1,9 +1,5 @@
 <script lang="ts">
-	import type { navNode } from '$lib/nav/nav.js';
-	import Page from '$lib/nav/page.svelte';
-	import Menu from '$lib/nav/menu.svelte';
-	import Button from '$lib/widget/button.svelte';
-	import Shortcuts, { shortcuts } from '$lib/nav/shortcuts.svelte';
+	import { type navNode, Page, Menu, Button, Shortcuts, shortcuts } from '$lib';
 
 	const links: navNode[] = [
 		{

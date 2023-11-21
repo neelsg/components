@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { colorBasic } from '$lib/util/color.js';
-	import Link from '$lib/widget/link.svelte';
-	import LinkMail from '$lib/widget/linkMail.svelte';
+	import { colorBasic, Link, LinkMail } from '$lib';
 </script>
 
 {#each colorBasic as c, i}

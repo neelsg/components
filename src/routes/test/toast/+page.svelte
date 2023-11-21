@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { toast } from '$lib/util/toast.svelte';
-	import Button from '$lib/widget/button.svelte';
+	import { toast, Button } from '$lib';
 </script>
 
 <Button on:click={() => toast.add('Hello')}>stone</Button>

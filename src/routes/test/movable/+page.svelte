@@ -1,7 +1,5 @@
 <script lang="ts">
-	import Movable from '$lib/widget/movable.svelte';
-	import Button from '$lib/widget/button.svelte';
-	import { toast } from '$lib/util/toast.svelte';
+	import { Button, Movable, toast } from '$lib';
 
 	let x: number = 200;
 	let y: number = 300;
@@ -26,7 +24,7 @@
 	</Movable>
 </div>
 
-<div class="flex p-2 fixed top-0 left-8 z-10">
+<div class="flex z-10">
 	<Button space on:click={() => (scaleFactor -= 0.1)}>-</Button>
 	<Button space on:click={() => (scaleFactor += 0.1)}>+</Button>
 	<Button space on:click={() => (visible = !visible)}>V</Button>
