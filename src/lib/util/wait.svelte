@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	import { writable, get, type Writable } from 'svelte/store';
-	import { goto } from '$app/navigation';
 	import { json } from '@sveltejs/kit';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 
 	export const wait = (() => {

@@ -1,3 +1,11 @@
+import type { formAction } from './form/_formAction.svelte';
+import type { formBlock } from './form/_formBlock.svelte';
+import type { formBlockField } from './form/_formBlockField.svelte';
+import type { formDetail } from './form/_formDetail.svelte';
+import type { formDetailAction } from './form/_formDetailAction.svelte';
+import type { formDetailField } from './form/_formDetailField.svelte';
+import type { form } from './form/form.svelte';
+import Form from './form/form.svelte';
 import Error from './layout/error.svelte';
 import Header from './layout/header.svelte';
 import Layout from './layout/layout.svelte';
@@ -24,6 +32,7 @@ import InputNumber from './widget/inputNumber.svelte';
 import InputOption from './widget/inputOption.svelte';
 import InputOptionMulti from './widget/inputOptionMulti.svelte';
 import InputText from './widget/inputText.svelte';
+import InputComputed from './widget/inputComputed.svelte';
 import Link from './widget/link.svelte';
 import LinkMail from './widget/linkMail.svelte';
 import Movable from './widget/movable.svelte';
@@ -38,6 +47,14 @@ export {
 	colorFull,
 	Crumbs,
 	Error,
+	Form,
+	type formAction,
+	type formBlock,
+	type formBlockField,
+	type formDetail,
+	type formDetailAction,
+	type formDetailField,
+	type form,
 	Header,
 	Icon,
 	iconPaths,
@@ -45,6 +62,7 @@ export {
 	Input,
 	InputBinary,
 	InputCheck,
+	InputComputed,
 	InputDropdown,
 	InputNumber,
 	InputOption,

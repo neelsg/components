@@ -14,5 +14,6 @@ export const nodes: navNode[] = [
 	{ label: 'Page', url: '/test/page' },
 	{ label: 'Movable', url: '/test/movable' },
 	{ label: 'Binary', url: '/test/binary' },
-	{ label: 'Zoomable', url: '/test/zoomable' }
+	{ label: 'Zoomable', url: '/test/zoomable' },
+	{ label: 'Form', url: '/test/form' }
 ];

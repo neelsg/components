@@ -25,6 +25,7 @@ An input box with a popup that will display the available values
 	export let used: string[] = []; // use to validate that you don't have duplicates
 	export let upper: boolean = false; // automatically make input value uppercase
 	export let space: boolean = false; // add some padding around the input
+	export let affix: string = ''; // any text to the right of the field
 
 	const dispatch = createEventDispatcher();
 
@@ -96,94 +97,99 @@ An input box with a popup that will display the available values
 			{label}
 		</div>
 	{/if}
-	<fieldset
-		class="flex w-full rounded border transition-colors
-    {disabled
-			? 'border-stone-400 dark:border-stone-700 text-stone-600 dark:text-stone-400'
-			: 'border-stone-900 dark:border-stone-200 text-black dark:text-white'}
-    {disabled ? 'bg-transparent' : 'bg-white dark:bg-stone-800'}
-    invalid:border-red-600 dark:invalid:border-red-400
-  "
-	>
-		<input
-			on:input={input}
-			class="p-1 w-full rounded-l
-        {align == 'center' ? 'text-center' : align == 'right' ? 'text-right' : 'text-left'}
-        {disabled
-				? 'bg-transparent'
-				: 'bg-white dark:bg-stone-800 hover:bg-stone-100 dark:hover:bg-stone-700'}
-      "
-			type="text"
-			id={name}
-			{name}
-			{required}
-			{disabled}
-			{placeholder}
-			{form}
-			list={datalistId}
-			bind:value
-			bind:this={element}
-		/>
-		{#if !disabled}
-			<button
-				on:click|preventDefault={listOpen}
-				class="p-1 pl-2 rounded-r bg-transparent transition-colors
-          hover:bg-stone-200 dark:hover:bg-stone-600
-          text-stone-600 dark:text-stone-400 hover:text-black dark:hover:text-white
-        "
-			>
-				<Icon key="magnifying-glass" />
-			</button>
-		{/if}
-	</fieldset>
-	<Popup
-		bind:open={listOpen}
-		bind:close={listClose}
-		on:closed={() => {
-			filterText = '';
-		}}
-	>
-		<div slot="top" class="flex">
-			{#if label}
-				<div class="p-1 text-lg font-semibold">{label}</div>
+	<div class="w-full flex flex-wrap sm:flex-nowrap">
+		<fieldset
+			class="flex w-full rounded border transition-colors
+			{disabled
+				? 'border-stone-400 dark:border-stone-700 text-stone-700 dark:text-stone-300'
+				: 'border-stone-900 dark:border-stone-200 text-black dark:text-white'}
+			{disabled ? 'bg-transparent' : 'bg-white dark:bg-stone-800'}
+			invalid:border-red-600 dark:invalid:border-red-400
+		"
+		>
+			<input
+				on:input={input}
+				class="p-1 w-full rounded-l
+					{align == 'center' ? 'text-center' : align == 'right' ? 'text-right' : 'text-left'}
+					{disabled
+					? 'bg-transparent'
+					: 'bg-white dark:bg-stone-800 hover:bg-stone-100 dark:hover:bg-stone-700'}
+				"
+				type="text"
+				id={name}
+				{name}
+				{required}
+				{disabled}
+				{placeholder}
+				{form}
+				list={datalistId}
+				bind:value
+				bind:this={element}
+			/>
+			{#if !disabled}
+				<button
+					on:click|preventDefault={listOpen}
+					class="p-1 pl-2 rounded-r bg-transparent transition-colors
+						hover:bg-stone-200 dark:hover:bg-stone-600
+						text-stone-600 dark:text-stone-400 hover:text-black dark:hover:text-white
+					"
+				>
+					<Icon key="magnifying-glass" />
+				</button>
 			{/if}
-			<div class="flex p-1">
-				<div class="p-1">
-					<Icon key="funnel" />
-				</div>
-				<Input type="search" bind:value={filterText} placeholder="Filter..." />
-			</div>
-		</div>
-		<div class="flex flex-col w-full">
-			{#each options ?? [] as o}
-				{#if filter(o, filterText)}
-					<button
-						type="button"
-						on:click|preventDefault|stopPropagation={() => click(o)}
-						class="flex text-left w-full hover:bg-stone-200 dark:hover:bg-stone-700"
-					>
-						{#if typeof o == 'string'}
-							<div class="p-2 w-full">
-								{o || '-'}
-							</div>
-						{:else}
-							{#each o as col, i}
-								<div
-									class="p-2 w-full
-										{i == 0 ? 'font-bold' : 'text-stone-600 dark:text-stone-400'}
-									"
-								>
-									{col || '-'}
-								</div>
-							{/each}
-						{/if}
-					</button>
+		</fieldset>
+		{#if affix}
+			<div class="w-full p-1 font-semibold">{affix}</div>
+		{/if}
+		<Popup
+			bind:open={listOpen}
+			bind:close={listClose}
+			on:closed={() => {
+				filterText = '';
+			}}
+		>
+			<div slot="top" class="flex">
+				{#if label}
+					<div class="p-1 text-lg font-semibold">{label}</div>
 				{/if}
-			{:else}
-				<tr><td> No items in selection </td></tr>
-			{/each}
-		</div>
-	</Popup>
+				<div class="flex p-1">
+					<div class="p-1">
+						<Icon key="funnel" />
+					</div>
+					<Input type="search" bind:value={filterText} placeholder="Filter..." />
+				</div>
+			</div>
+			<div class="flex flex-col w-full">
+				{#each options ?? [] as o}
+					{#if filter(o, filterText)}
+						<button
+							type="button"
+							on:click|preventDefault|stopPropagation={() => click(o)}
+							class="flex text-left w-full hover:bg-stone-200 dark:hover:bg-stone-700"
+						>
+							{#if typeof o == 'string'}
+								<div class="p-2 w-full">
+									{o || '-'}
+								</div>
+							{:else}
+								{#each o as col, i}
+									<div
+										class="p-2 w-full
+											{i == 0 ? 'font-bold' : 'text-stone-600 dark:text-stone-400'}
+										"
+									>
+										{col || '-'}
+									</div>
+								{/each}
+							{/if}
+						</button>
+					{/if}
+				{:else}
+					<tr><td> No items in selection </td></tr>
+				{/each}
+			</div>
+		</Popup>
+	</div>
 </label>
 
 <datalist id={datalistId}>

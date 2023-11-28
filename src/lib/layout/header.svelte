@@ -6,7 +6,6 @@
 	import Icon from '../widget/icon.svelte';
 	import Menu from '../nav/menu.svelte';
 	import ButtonText from '../widget/buttonText.svelte';
-	import Link from '../widget/link.svelte';
 
 	export let title: string;
 	export let height: number = 0;
@@ -54,10 +53,10 @@
 </header>
 
 <Menu
-	bind:open={openMenu}
 	collapsible
 	nodes={navNodes}
 	context={navContext}
+	bind:open={openMenu}
 	on:click={(e) => shortcuts.add(e.detail.url)}
 >
 	<footer slot="footer">

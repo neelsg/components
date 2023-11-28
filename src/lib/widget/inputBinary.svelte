@@ -50,7 +50,7 @@ Input of digital bits that displays the resulting decimal and hex value
 					? 'bg-red-700 text-white hover:bg-red-500'
 					: 'bg-teal-700 text-white hover:bg-teal-500'
 				: disabled
-				? 'bg-transparent text-stone-600 dark:text-stone-400'
+				? 'bg-transparent text-stone-700 dark:text-stone-300'
 				: 'bg-white dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-black dark:text-white'}
       "
 			{disabled}
@@ -67,7 +67,7 @@ Input of digital bits that displays the resulting decimal and hex value
 			? 'border-stone-400 dark:border-stone-700'
 			: 'border-stone-900 dark:border-stone-200'}
       {disabled
-			? 'bg-transparent text-stone-600 dark:text-stone-400'
+			? 'bg-transparent text-stone-700 dark:text-stone-300'
 			: 'bg-stone-100 dark:bg-stone-700 text-black dark:text-white'}
     "
 	>

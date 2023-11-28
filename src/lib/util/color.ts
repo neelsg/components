@@ -1,5 +1,4 @@
 export const colorBasic = [null, 'blue', 'green', 'yellow', 'red'] as const;
-
 export const colorFull = [
 	null,
 	'slate',

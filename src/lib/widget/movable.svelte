@@ -9,6 +9,7 @@ An element that can be moved around on the screen
 
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+
 	const dispatch = createEventDispatcher();
 
 	export let x: number = 0; // x position

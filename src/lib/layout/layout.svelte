@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import type { navNode } from '../nav/nav.js';
+	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
 	import { theme } from '../util/theme.svelte';
 	import { shortcuts } from '../nav/shortcuts.svelte';
@@ -26,7 +26,7 @@
 
 <div class="min-h-screen flex flex-col font-sans text-black dark:text-stone-300">
 	<Header bind:height={headerHeight} {title} {navNodes} {navContext} navCurrent={$page.route.id}>
-		<div slot="right">
+		<div class="flex" slot="right">
 			<slot name="header-right" />
 		</div>
 		<div slot="menu-footer">

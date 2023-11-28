@@ -2,7 +2,6 @@
 	import { writable, get, type Writable } from 'svelte/store';
 
 	export const toastColors = [null, 'blue', 'green', 'yellow', 'red'] as const;
-
 	export const toast = (() => {
 		const store: Writable<
 			{
