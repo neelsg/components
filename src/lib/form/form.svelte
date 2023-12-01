@@ -4,9 +4,6 @@
 	import type { formBlock } from './_formBlock.svelte';
 	import type { formDetail } from './_formDetail.svelte';
 
-	import FormBlock from './_formBlock.svelte';
-	import FormDetail from './_formDetail.svelte';
-
 	export type form = {
 		title: string;
 		icon?: keyof typeof iconPaths;
@@ -18,10 +15,12 @@
 
 <script lang="ts">
 	import FormAction from './_formAction.svelte';
+	import FormBlock from './_formBlock.svelte';
+	import FormDetail from './_formDetail.svelte';
 	import Icon from '../widget/icon.svelte';
 
 	export let definition: form;
-	export let meta: unknown;
+	export let meta: unknown = null;
 	export let doc: { [key: string]: any };
 	export let disabled: boolean = false;
 

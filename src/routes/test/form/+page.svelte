@@ -23,7 +23,8 @@
 						color: 'red',
 						click: () => {
 							meta.cancelled = !meta.cancelled;
-						}
+						},
+						min_width: 50
 					}
 				],
 				type: 'block',
