@@ -1,4 +1,6 @@
 <script lang="ts" context="module">
+	import { formattedNumber } from '../util/number';
+
 	export type listField = {
 		key: string;
 		label: string;
@@ -7,11 +9,6 @@
 		decimals?: number;
 		fn?: (meta: unknown, item: { [key: string]: any }) => string | boolean | number;
 		hide?: (meta: unknown) => boolean;
-	};
-
-	const formattedNumber = (value: number, decimals: number): string => {
-		const r = (value || 0).toFixed(decimals).split('.');
-		return r[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + (r[1] ? '.' + r[1] : '');
 	};
 
 	export const listFieldValue = (

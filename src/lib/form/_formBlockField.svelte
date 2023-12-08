@@ -1,4 +1,6 @@
 <script lang="ts" context="module">
+	import { formattedNumber } from '../util/number';
+
 	type fieldText = {
 		type: 'text' | 'email' | 'date' | 'password' | 'search' | 'tel' | 'time' | 'url';
 		required?: boolean;
@@ -22,6 +24,7 @@
 		step?: number;
 		min?: number;
 		max?: number;
+		decimals?: number;
 	};
 
 	type fieldOption = {
@@ -69,6 +72,22 @@
 		| fieldComputed
 		| fieldTextArea
 	);
+
+	export const formBlockFieldValue = (
+		definition: formBlockField,
+		meta: unknown,
+		doc: { [key: string]: any }
+	): string => {
+		if (definition.type == 'computed') {
+			const v = definition.fn ? definition.fn(meta, doc) : doc[definition.key];
+			if (definition.format == 'number') return formattedNumber(v, definition.decimals ?? 0);
+			if (definition.format == 'check') return v ? 'Yes' : 'No';
+		}
+		if (definition.type == 'number')
+			return formattedNumber(doc[definition.key] ?? 0, definition.decimals ?? 0);
+		if (definition.type == 'check') return doc[definition.key] ? 'Yes' : 'No';
+		return doc[definition.key] ?? '';
+	};
 </script>
 
 <script lang="ts">

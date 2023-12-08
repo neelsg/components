@@ -4,22 +4,22 @@ import type { formBlockField } from './form/_formBlockField.svelte';
 import type { formDetail } from './form/_formDetail.svelte';
 import type { formDetailAction } from './form/_formDetailAction.svelte';
 import type { formDetailField } from './form/_formDetailField.svelte';
-import type { form } from './form/form.svelte';
-import Form from './form/form.svelte';
+import Form, { type form } from './form/form.svelte';
 import Error from './layout/error.svelte';
 import Header from './layout/header.svelte';
 import Layout from './layout/layout.svelte';
 import type { listAction } from './list/_listAction.svelte';
 import type { listDetailAction } from './list/_listDetailAction.svelte';
 import type { listField } from './list/_listField.svelte';
-import type { list } from './list/list.svelte';
-import List from './list/list.svelte';
+import List, { type list } from './list/list.svelte';
 import Crumbs from './nav/crumbs.svelte';
 import Menu from './nav/menu.svelte';
 import { nav, type navNode } from './nav/nav.js';
 import Page from './nav/page.svelte';
 import PageForm from './nav/pageForm.svelte';
 import Shortcuts, { shortcuts } from './nav/shortcuts.svelte';
+import Report, { type report } from './report/report.svelte';
+import type { reportItem } from './report/_reportItem.svelte';
 import { colorBasic, colorFull } from './util/color.js';
 import Theme, { theme } from './util/theme.svelte';
 import Toast, { toast } from './util/toast.svelte';
@@ -41,6 +41,13 @@ import InputComputed from './widget/inputComputed.svelte';
 import Link from './widget/link.svelte';
 import LinkMail from './widget/linkMail.svelte';
 import Movable from './widget/movable.svelte';
+import Pdf, {
+	type pdfContent,
+	type pdfAsyncContent,
+	type pdfOptions,
+	pdfPageNumbers,
+	pdfDataUrl
+} from './widget/pdf.svelte';
 import Popup from './widget/popup.svelte';
 import Zoomable from './widget/zoomable.svelte';
 
@@ -53,13 +60,13 @@ export {
 	Crumbs,
 	Error,
 	Form,
+	type form,
 	type formAction,
 	type formBlock,
 	type formBlockField,
 	type formDetail,
 	type formDetailAction,
 	type formDetailField,
-	type form,
 	Header,
 	Icon,
 	iconPaths,
@@ -76,18 +83,27 @@ export {
 	Layout,
 	Link,
 	LinkMail,
+	List,
+	type list,
 	type listAction,
 	type listDetailAction,
 	type listField,
-	type list,
-	List,
 	Menu,
 	Movable,
 	nav,
 	type navNode,
 	Page,
 	PageForm,
+	Pdf,
+	type pdfAsyncContent,
+	type pdfContent,
+	type pdfOptions,
+	pdfDataUrl,
+	pdfPageNumbers,
 	Popup,
+	Report,
+	type report,
+	type reportItem,
 	Shortcuts,
 	shortcuts,
 	Theme,

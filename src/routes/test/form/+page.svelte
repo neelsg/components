@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Form, toast, type form } from '$lib';
+	import { Form, toast, type form, pdfDataUrl } from '$lib';
 
 	const definition: form = {
 		title: 'Test Form',
@@ -56,7 +56,8 @@
 							key: 'testF3',
 							label: 'Test Field 3 Comp',
 							format: 'number',
-							align: 'right'
+							align: 'right',
+							decimals: 3
 						},
 						{
 							type: 'computed',
@@ -64,7 +65,8 @@
 							label: 'Test Comp',
 							format: 'number',
 							align: 'right',
-							fn: () => 123456.789
+							fn: () => 123456.789,
+							decimals: 4
 						},
 						{
 							type: 'check',
@@ -89,32 +91,32 @@
 				fields: [
 					{
 						type: 'text',
-						key: 'testF',
-						label: 'Test Field',
-						key_description: 'testFD'
+						key: 'testF1',
+						label: 'Test Field 1',
+						key_description: 'testF5'
 					},
 					{
 						type: 'computed',
-						key: 'testF',
-						label: 'Test Field',
-						key_description: 'testFD'
+						key: 'testF2',
+						label: 'Test Field 2',
+						key_description: 'testF2D'
 					},
 					{
 						type: 'computed',
-						key: 'testF',
-						label: 'Test Field',
-						key_description: 'testFD'
+						key: 'testF3',
+						label: 'Test Field 3',
+						key_description: 'testF3D'
 					},
 					{
 						type: 'number',
-						key: 'testF2',
-						label: 'Test Field 2',
+						key: 'testF4',
+						label: 'Test Field 4',
 						align: 'right'
 					},
 					{
 						type: 'text',
-						key: 'testF3',
-						label: 'Test Field 3',
+						key: 'testF5',
+						label: 'Test Field 5',
 						unique: true
 					}
 				],
@@ -133,6 +135,14 @@
 						testF2: (meta: unknown, doc: unknown): number => {
 							const d = doc as { x: any[] };
 							return d.x.length;
+						},
+						testF4: (meta: unknown, doc: unknown): string => {
+							return 'Hi';
+						}
+					},
+					{
+						testF4: (meta: unknown, doc: unknown): string => {
+							return 'There';
 						}
 					}
 				],
@@ -146,7 +156,22 @@
 			}
 		],
 		icon: 'archive-box',
-		cancelled: () => meta.cancelled
+		cancelled: () => meta.cancelled,
+		print: () => {
+			return {
+				prepend: async () => {
+					return {
+						columns: [
+							{ image: await pdfDataUrl('/images/cloud.jpg'), width: 50 },
+							{ text: 'PRE', color: '#090', marginLeft: 50 }
+						]
+					};
+				},
+				append: { text: 'POST', color: '#909' },
+				pageOrientation: 'landscape'
+			};
+		},
+		copy: () => true
 	};
 	const meta = {
 		cancelled: false

@@ -16,5 +16,7 @@ export const nodes: navNode[] = [
 	{ label: 'Binary', url: '/test/binary' },
 	{ label: 'Zoomable', url: '/test/zoomable' },
 	{ label: 'Form', url: '/test/form' },
-	{ label: 'List', url: '/test/list' }
+	{ label: 'List', url: '/test/list' },
+	{ label: 'Pdf', url: '/test/pdf' },
+	{ label: 'Report', url: '/test/report' }
 ];

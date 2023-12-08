@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fly, fade } from 'svelte/transition';
+	import { slide, fade } from 'svelte/transition';
 	import { createEventDispatcher } from 'svelte';
 	import { nav, type navNode } from './nav.js';
 	import MenuNode from './_menuNode.svelte';
@@ -48,7 +48,7 @@
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div
 				on:click|stopPropagation
-				transition:fly={{ duration: 150, x: -300 }}
+				transition:slide={{ duration: 150, axis: 'x' }}
 				class="
           flex flex-col fixed top-0 bottom-0 shadow shadow-stone-500 bg-stone-50 dark:bg-stone-950 border-r border-stone-500 w-5/6 sm:w-2/3 md:w-1/2 lg:w-1/3
           overflow-y-scroll justify-between

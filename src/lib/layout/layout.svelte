@@ -37,7 +37,7 @@
 		<Toast />
 		<Wait />
 	</div>
-	<main style="padding-top: {headerHeight}px" class="flex-grow">
+	<main style="padding-top: {headerHeight}px" class="flex flex-col grow">
 		<slot />
 	</main>
 </div>

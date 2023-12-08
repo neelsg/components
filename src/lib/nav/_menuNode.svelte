@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fly } from 'svelte/transition';
+	import { slide } from 'svelte/transition';
 	import { createEventDispatcher } from 'svelte';
 	import { nav, type navNode } from './nav.js';
 	import Link from '../widget/link.svelte';
@@ -147,7 +147,7 @@
 
 {#if children.filter((c) => !c.iconOnly).length > 0 && (expanded || !collapsible)}
 	<div
-		in:fly={{ duration: 150, y: -30 }}
+		transition:slide={{ duration: 150 }}
 		class="
       border-t border-b border-stone-500 bg-stone-500 bg-opacity-10 flex flex-col
     "

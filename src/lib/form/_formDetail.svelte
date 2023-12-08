@@ -16,6 +16,19 @@
 		fixed?: (meta: unknown, doc: unknown) => boolean;
 		hide?: (meta: unknown, doc: unknown) => boolean;
 	};
+
+	export const formDetailFilterEmpty = (
+		definition: formDetail,
+		doc: { [key: string]: any }
+	): { [key: string]: any }[] => {
+		return (doc[definition.key] ?? []).filter((item: unknown) => {
+			const i = item as { [key: string]: any };
+			for (const v of Object.values(i)) {
+				if (v) return true;
+			}
+			return false;
+		});
+	};
 </script>
 
 <script lang="ts">
