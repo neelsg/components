@@ -8,10 +8,13 @@
 		ContentSvg,
 		ContentUnorderedList,
 		PageOrientation,
-		TableCell
+		TableCell,
+		Size
 	} from 'pdfmake/interfaces';
 
 	export type pdfPageOrientation = PageOrientation;
+
+	export type pdfWidth = Size;
 
 	export type pdfTableCell = TableCell;
 

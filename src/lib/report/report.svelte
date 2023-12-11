@@ -10,7 +10,7 @@
 		fields: reportField[];
 		pageOrientation?: pdfPageOrientation;
 		params?: reportParam[];
-		submit?: () => Promise<void>;
+		submit?: () => Promise<boolean>;
 	};
 </script>
 
@@ -56,19 +56,37 @@
 		toast.add('Copied data to clipboard', 'blue');
 	};
 
-	const submit = (to: 'pdf' | 'html') => {
-		return async () => {
-			disabled = true;
-			paramText = [];
-			for (const p of definition.params ?? []) {
-				if (p.key_to && params[p.key_to]) {
+	const getParamText = () => {
+		paramText = [];
+		for (const p of definition.params ?? []) {
+			if (p.key_to && params[p.key_to]) {
+				if (params[p.key] == params[p.key_to]) {
+					paramText.push(`${p.label}: ${params[p.key]}`);
+				} else {
 					paramText.push(`${p.label}: ${params[p.key]} - ${params[p.key_to]}`);
-				} else if (params[p.key]) {
+				}
+			} else if (params[p.key]) {
+				if (Array.isArray(params[p.key])) {
+					if (params[p.key].length > 0) {
+						paramText.push(`${p.label}: ${params[p.key]}`);
+					}
+				} else {
 					paramText.push(`${p.label}: ${params[p.key]}`);
 				}
 			}
+		}
+	};
+
+	const submit = (to: 'pdf' | 'html') => {
+		return async () => {
+			disabled = true;
+			getParamText();
 			if (definition.submit) {
-				await definition.submit();
+				const res = await definition.submit();
+				if (!res) {
+					disabled = false;
+					return;
+				}
 			}
 			if (to == 'pdf') {
 				showPdf();
@@ -87,6 +105,7 @@
 	const showPdf = () => {
 		const def: pdfContent[] = [];
 
+		// title
 		def.push({
 			columns: [
 				{
@@ -105,6 +124,7 @@
 			]
 		});
 
+		// parameters
 		if (paramText.length) {
 			def.push({
 				text: 'Parameters:',
@@ -118,6 +138,7 @@
 			});
 		}
 
+		// body
 		const tableBody: pdfTableCell[][] = [];
 		tableBody.push(
 			definition.fields.map((f) => {
@@ -152,7 +173,7 @@
 
 		def.push({
 			table: {
-				widths: definition.fields.map(() => '*'),
+				widths: definition.fields.map((f) => f.width ?? '*'),
 				headerRows: 1,
 				body: tableBody
 			},

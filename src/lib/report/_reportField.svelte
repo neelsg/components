@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
 	import type { reportItem } from './_reportItem.svelte';
+	import type { pdfWidth } from '../widget/pdf.svelte';
 	import { formattedNumber } from '../util/number';
 
 	type fieldText = {
@@ -19,6 +20,7 @@
 		key: string;
 		label: string | string[];
 		align?: 'left' | 'center' | 'right';
+		width?: pdfWidth;
 	} & (fieldText | fieldCheck | fieldNumber);
 
 	export const reportFieldValue = (definition: reportField, item: reportItem): string => {
