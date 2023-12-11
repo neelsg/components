@@ -62,6 +62,7 @@
 		hide?: (meta: unknown, doc: unknown) => boolean;
 		input?: (meta: unknown, doc: unknown) => void;
 		disable?: (meta: unknown, doc: unknown) => boolean;
+		no_disable?: boolean;
 	} & (
 		| fieldText
 		| fieldCheck
@@ -111,6 +112,9 @@
 			doc = doc;
 		}
 	};
+
+	$: isDisabled =
+		(disabled && !definition.no_disable) || (definition.disable && definition.disable(meta, doc));
 </script>
 
 <div class="flex">
@@ -121,7 +125,7 @@
 				on:input={onInput}
 				label={definition.label}
 				labelSize={100 / 3}
-				disabled={disabled || (definition.disable && definition.disable(meta, doc))}
+				disabled={isDisabled}
 				affix={definition.key_description ? doc[definition.key_description] : null}
 				align={definition.align}
 				type={definition.type}
@@ -134,7 +138,7 @@
 				on:input={onInput}
 				label={definition.label}
 				labelSize={100 / 3}
-				disabled={disabled || (definition.disable && definition.disable(meta, doc))}
+				disabled={isDisabled}
 				affix={definition.key_description ? doc[definition.key_description] : null}
 				align={definition.align}
 			/>
@@ -144,7 +148,7 @@
 				on:input={onInput}
 				label={definition.label}
 				labelSize={100 / 3}
-				disabled={disabled || (definition.disable && definition.disable(meta, doc))}
+				disabled={isDisabled}
 				affix={definition.key_description ? doc[definition.key_description] : null}
 				align={definition.align}
 				required={definition.required}
@@ -157,7 +161,7 @@
 				on:input={onInput}
 				label={definition.label}
 				labelSize={100 / 3}
-				disabled={disabled || (definition.disable && definition.disable(meta, doc))}
+				disabled={isDisabled}
 				affix={definition.key_description ? doc[definition.key_description] : null}
 				align={definition.align}
 				required={definition.required}
@@ -171,7 +175,7 @@
 				on:input={onInput}
 				label={definition.label}
 				labelSize={100 / 3}
-				disabled={disabled || (definition.disable && definition.disable(meta, doc))}
+				disabled={isDisabled}
 				affix={definition.key_description ? doc[definition.key_description] : null}
 				col={definition.col}
 				options={definition.options(meta, doc)}
@@ -183,7 +187,7 @@
 				on:input={onInput}
 				label={definition.label}
 				labelSize={100 / 3}
-				disabled={disabled || (definition.disable && definition.disable(meta, doc))}
+				disabled={isDisabled}
 				affix={definition.key_description ? doc[definition.key_description] : null}
 				col={definition.col}
 				options={definition.options(meta, doc)}
@@ -195,7 +199,7 @@
 				on:input={onInput}
 				label={definition.label}
 				labelSize={100 / 3}
-				disabled={disabled || (definition.disable && definition.disable(meta, doc))}
+				disabled={isDisabled}
 				affix={definition.key_description ? doc[definition.key_description] : null}
 				align={definition.align}
 				required={definition.required}
@@ -206,7 +210,7 @@
 				value={definition.fn ? definition.fn(meta, doc) : doc[definition.key]}
 				label={definition.label}
 				labelSize={100 / 3}
-				disabled={disabled || (definition.disable && definition.disable(meta, doc))}
+				disabled={isDisabled}
 				affix={definition.key_description ? doc[definition.key_description] : null}
 				align={definition.align}
 				dataType={definition.format}
