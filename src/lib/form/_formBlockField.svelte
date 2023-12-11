@@ -108,6 +108,7 @@
 	const onInput = () => {
 		if (definition.input) {
 			definition.input(meta, doc);
+			doc = doc;
 		}
 	};
 </script>

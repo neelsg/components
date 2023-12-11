@@ -10,6 +10,7 @@
 
 	type fieldCheck = {
 		type: 'check';
+		required?: undefined;
 	};
 
 	type fieldDropdown = {
@@ -39,6 +40,7 @@
 
 	type fieldOptionMulti = {
 		type: 'option-multi';
+		required?: undefined;
 		col?: boolean;
 		options: (meta: unknown, doc: unknown, item: unknown) => string[] | string[][];
 		blank?: string;
@@ -46,6 +48,7 @@
 
 	type fieldComputed = {
 		type: 'computed';
+		required?: undefined;
 		format?: 'text' | 'number' | 'check';
 		decimals?: number;
 		fn?: (meta: unknown, doc: unknown, item: unknown) => unknown;
@@ -113,6 +116,7 @@
 
 		if (definition.input) {
 			definition.input(meta, doc, item);
+			doc = doc;
 		}
 	};
 
@@ -122,6 +126,12 @@
 			.filter((e: unknown, i: number) => i != index)
 			.map((v: any) => v[definition.key]);
 	};
+
+	$: required = definition.required
+		? Object.keys(item).reduce((p, c) => {
+				return item[c] ? true : p;
+		  }, false)
+		: false;
 </script>
 
 {#if definition.type == 'text' || definition.type == 'email' || definition.type == 'date' || definition.type == 'password' || definition.type == 'search' || definition.type == 'tel' || definition.type == 'time' || definition.type == 'url'}
@@ -132,9 +142,9 @@
 		affix={definition.key_description ? item[definition.key_description] : null}
 		align={definition.align}
 		type={definition.type}
-		required={definition.required}
 		upper={definition.upper}
 		used={definition.unique ? fieldUsed(index, doc) : []}
+		{required}
 	/>
 {:else if definition.type == 'check'}
 	<InputCheck
@@ -151,10 +161,10 @@
 		disabled={disabled || (definition.disable && definition.disable(meta, doc, item))}
 		affix={definition.key_description ? item[definition.key_description] : null}
 		align={definition.align}
-		required={definition.required}
 		upper={definition.upper}
 		options={definition.options(meta, doc, item)}
 		used={definition.unique ? fieldUsed(index, doc) : []}
+		{required}
 	/>
 {:else if definition.type == 'number'}
 	<InputNumber
@@ -163,10 +173,10 @@
 		disabled={disabled || (definition.disable && definition.disable(meta, doc, item))}
 		affix={definition.key_description ? item[definition.key_description] : null}
 		align={definition.align}
-		required={definition.required}
 		step={definition.step}
 		min={definition.min}
 		max={definition.max}
+		{required}
 	/>
 {:else if definition.type == 'option'}
 	<InputOption
