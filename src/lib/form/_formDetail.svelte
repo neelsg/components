@@ -73,6 +73,25 @@
 		doc[definition.key].splice(index, 1);
 		doc = doc;
 	};
+
+	const keyDown = (index: number, field: formDetailField) => {
+		return (e: KeyboardEvent) => {
+			if (e.key == 'ArrowDown') {
+				e.preventDefault();
+				if (index > 0) {
+					doc[definition.key][index][field.key] = doc[definition.key][index - 1][field.key];
+
+					if (!fixed && index == doc[definition.key].length - 1) {
+						doc[definition.key] = [...doc[definition.key], {}];
+					}
+					if (field.input) {
+						field.input(meta, doc, doc[definition.key][index]);
+						doc = doc;
+					}
+				}
+			}
+		};
+	};
 </script>
 
 <div class="flex justify-between w-full border-t border-stone-500">
@@ -87,8 +106,66 @@
 		{/each}
 	</div>
 </div>
-<div class="pb-1">
-	<table class="w-full">
+<table class="w-full pb-1">
+	<tr>
+		{#if !fixed}
+			<td class="w-7">&nbsp;</td>
+		{/if}
+		{#each detailActions as a}
+			<td class="w-7">&nbsp;</td>
+		{/each}
+		{#each fields as f}
+			<td class="px-1">
+				<div
+					class="flex font-semibold
+						{f.align == 'center' ? 'justify-center' : f.align == 'right' ? 'justify-end' : 'justify-start'}
+					"
+				>
+					{f.label}
+					{#if !f.label}&nbsp;{/if}
+				</div>
+			</td>
+		{/each}
+	</tr>
+	{#each doc[definition.key] ?? [] as r, i}
+		<tr>
+			{#if !fixed}
+				<td class="w-7">
+					{#if i == doc[definition.key].length - 1 || disabled}
+						&nbsp;
+					{:else}
+						<div class="flex justify-center">
+							<ButtonText compact on:click={() => removeItem(i)} color="red" {disabled}>
+								<div class="py-1 rounded border border-stone-500">
+									<Icon key="minus" />
+								</div>
+							</ButtonText>
+						</div>
+					{/if}
+				</td>
+			{/if}
+			{#each detailActions as a}
+				<td class="w-7">
+					<FormDetailAction definition={a} {meta} bind:doc bind:item={r} {disabled} />
+				</td>
+			{/each}
+			{#each fields as f}
+				<td on:keydown={keyDown(i, f)}>
+					<FormDetailField
+						definition={f}
+						sectionKey={definition.key}
+						index={i}
+						{meta}
+						{disabled}
+						{fixed}
+						bind:doc
+						bind:item={r}
+					/>
+				</td>
+			{/each}
+		</tr>
+	{/each}
+	{#each definition.totals ?? [] as r}
 		<tr>
 			{#if !fixed}
 				<td class="w-7">&nbsp;</td>
@@ -97,80 +174,20 @@
 				<td class="w-7">&nbsp;</td>
 			{/each}
 			{#each fields as f}
-				<td class="px-1">
+				<td>
 					<div
-						class="flex font-semibold
-							{f.align == 'center' ? 'justify-center' : f.align == 'right' ? 'justify-end' : 'justify-start'}
-						"
+						class="px-1 font-semibold
+							{f.align == 'right' ? 'text-right' : f.align == 'center' ? 'text-center' : 'text-left'}
+					"
 					>
-						{f.label}
-						{#if !f.label}&nbsp;{/if}
+						{#if r[f.key]}
+							{r[f.key](meta, doc)}
+						{:else}
+							&nbsp;
+						{/if}
 					</div>
 				</td>
 			{/each}
 		</tr>
-		{#each doc[definition.key] ?? [] as r, i}
-			<tr>
-				{#if !fixed}
-					<td>
-						{#if i == doc[definition.key].length - 1 || disabled}
-							&nbsp;
-						{:else}
-							<div class="flex justify-center">
-								<ButtonText compact on:click={() => removeItem(i)} color="red" {disabled}>
-									<div class="py-1 rounded border border-stone-500">
-										<Icon key="minus" />
-									</div>
-								</ButtonText>
-							</div>
-						{/if}
-					</td>
-				{/if}
-				{#each detailActions as a}
-					<td>
-						<FormDetailAction definition={a} {meta} bind:doc bind:item={r} {disabled} />
-					</td>
-				{/each}
-				{#each fields as f}
-					<td>
-						<FormDetailField
-							definition={f}
-							sectionKey={definition.key}
-							index={i}
-							{meta}
-							{disabled}
-							{fixed}
-							bind:doc
-							bind:item={r}
-						/>
-					</td>
-				{/each}
-			</tr>
-		{/each}
-		{#each definition.totals ?? [] as r}
-			<tr>
-				{#if !fixed}
-					<td class="w-7">&nbsp;</td>
-				{/if}
-				{#each detailActions as a}
-					<td class="w-7">&nbsp;</td>
-				{/each}
-				{#each fields as f}
-					<td>
-						<div
-							class="px-1 font-semibold
-								{f.align == 'right' ? 'text-right' : f.align == 'center' ? 'text-center' : 'text-left'}
-						"
-						>
-							{#if r[f.key]}
-								{r[f.key](meta, doc)}
-							{:else}
-								&nbsp;
-							{/if}
-						</div>
-					</td>
-				{/each}
-			</tr>
-		{/each}
-	</table>
-</div>
+	{/each}
+</table>

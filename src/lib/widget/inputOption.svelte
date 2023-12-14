@@ -16,7 +16,6 @@ Option selection
 	export let col: boolean = false; // show values in a column rather than next to each other
 	export let disabled: boolean = false; // disable the input
 	export let space: boolean = false; // add some padding around the input
-	export let affix: string = ''; // any text to the right of the field
 
 	const dispatch = createEventDispatcher();
 	const click = (option: string) => {
@@ -39,49 +38,44 @@ Option selection
 			{label}
 		</div>
 	{/if}
-	<div class="w-full flex flex-wrap sm:flex-nowrap">
-		<div class="w-full flex {col ? 'flex-col' : ''}">
-			{#each options ?? [] as o, i}
-				<button
-					on:click|preventDefault={() => click(typeof o == 'string' ? o : o[0])}
-					class="p-1 w-full transition-colors
-						{col ? 'border-x border-t' : 'border-y border-l'}
-						{i == 0 ? (col ? 'rounded-t' : 'rounded-l') : ''}
-						{i == options.length - 1 ? (col ? 'rounded-b border-b' : 'rounded-r border-r') : ''}
-						{disabled ? 'border-stone-400 dark:border-stone-700' : 'border-stone-900 dark:border-stone-200'}
-						{value == (typeof o == 'string' ? o : o[0])
-						? disabled
-							? 'bg-stone-500 dark:bg-stone-600 text-white dark:text-stone-300'
-							: 'bg-teal-700 text-white hover:bg-teal-500'
-						: disabled
-						? 'bg-transparent text-stone-700 dark:text-stone-300'
-						: 'bg-white dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-black dark:text-white'}
-					"
-					type="button"
-					{disabled}
-				>
-					{#if typeof o == 'string'}
-						{o == '' ? blank : o}
-					{:else}
-						<div class="flex w-full">
-							{#each o as col, i}
-								<div
-									class="w-full text-left
-											{i == 0 ? 'font-bold' : ''}
-										"
-								>
-									{col || (i == 0 ? blank : '-')}
-								</div>
-							{/each}
-						</div>
-					{/if}
-				</button>
-			{:else}
-				<div>No options available</div>
-			{/each}
-		</div>
-		{#if affix}
-			<div class="w-full p-1 font-semibold">{affix}</div>
-		{/if}
+	<div class="w-full flex {col ? 'flex-col' : ''}">
+		{#each options ?? [] as o, i}
+			<button
+				on:click|preventDefault={() => click(typeof o == 'string' ? o : o[0])}
+				class="p-1 w-full transition-colors
+					{col ? 'border-x border-t' : 'border-y border-l'}
+					{i == 0 ? (col ? 'rounded-t' : 'rounded-l') : ''}
+					{i == options.length - 1 ? (col ? 'rounded-b border-b' : 'rounded-r border-r') : ''}
+					{disabled ? 'border-stone-400 dark:border-stone-700' : 'border-stone-900 dark:border-stone-200'}
+					{value == (typeof o == 'string' ? o : o[0])
+					? disabled
+						? 'bg-stone-500 dark:bg-stone-600 text-white dark:text-stone-300'
+						: 'bg-teal-700 text-white hover:bg-teal-500'
+					: disabled
+					? 'bg-transparent text-stone-700 dark:text-stone-300'
+					: 'bg-white dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-black dark:text-white'}
+				"
+				type="button"
+				{disabled}
+			>
+				{#if typeof o == 'string'}
+					{o == '' ? blank : o}
+				{:else}
+					<div class="flex w-full">
+						{#each o as col, i}
+							<div
+								class="w-full text-left
+										{i == 0 ? 'font-bold' : ''}
+									"
+							>
+								{col || (i == 0 ? blank : '-')}
+							</div>
+						{/each}
+					</div>
+				{/if}
+			</button>
+		{:else}
+			<div>No options available</div>
+		{/each}
 	</div>
 </div>

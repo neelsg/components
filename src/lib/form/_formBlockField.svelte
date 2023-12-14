@@ -117,107 +117,104 @@
 		(disabled && !definition.no_disable) || (definition.disable && definition.disable(meta, doc));
 </script>
 
-<div class="flex">
-	<div class="w-full flex flex-wrap md:flex-nowrap">
-		{#if definition.type == 'text' || definition.type == 'email' || definition.type == 'date' || definition.type == 'password' || definition.type == 'search' || definition.type == 'tel' || definition.type == 'time' || definition.type == 'url'}
-			<Input
-				bind:value={doc[definition.key]}
-				on:input={onInput}
-				label={definition.label}
-				labelSize={100 / 3}
-				disabled={isDisabled}
-				affix={definition.key_description ? doc[definition.key_description] : null}
-				align={definition.align}
-				type={definition.type}
-				required={definition.required}
-				upper={definition.upper}
-			/>
-		{:else if definition.type == 'check'}
-			<InputCheck
-				bind:value={doc[definition.key]}
-				on:input={onInput}
-				label={definition.label}
-				labelSize={100 / 3}
-				disabled={isDisabled}
-				affix={definition.key_description ? doc[definition.key_description] : null}
-				align={definition.align}
-			/>
-		{:else if definition.type == 'dropdown'}
-			<InputDropdown
-				bind:value={doc[definition.key]}
-				on:input={onInput}
-				label={definition.label}
-				labelSize={100 / 3}
-				disabled={isDisabled}
-				affix={definition.key_description ? doc[definition.key_description] : null}
-				align={definition.align}
-				required={definition.required}
-				upper={definition.upper}
-				options={definition.options(meta, doc)}
-			/>
-		{:else if definition.type == 'number'}
-			<InputNumber
-				bind:value={doc[definition.key]}
-				on:input={onInput}
-				label={definition.label}
-				labelSize={100 / 3}
-				disabled={isDisabled}
-				affix={definition.key_description ? doc[definition.key_description] : null}
-				align={definition.align}
-				required={definition.required}
-				step={definition.step}
-				min={definition.min}
-				max={definition.max}
-			/>
-		{:else if definition.type == 'option'}
-			<InputOption
-				bind:value={doc[definition.key]}
-				on:input={onInput}
-				label={definition.label}
-				labelSize={100 / 3}
-				disabled={isDisabled}
-				affix={definition.key_description ? doc[definition.key_description] : null}
-				col={definition.col}
-				options={definition.options(meta, doc)}
-				blank={definition.blank}
-			/>
-		{:else if definition.type == 'option-multi'}
-			<InputOptionMulti
-				bind:value={doc[definition.key]}
-				on:input={onInput}
-				label={definition.label}
-				labelSize={100 / 3}
-				disabled={isDisabled}
-				affix={definition.key_description ? doc[definition.key_description] : null}
-				col={definition.col}
-				options={definition.options(meta, doc)}
-				blank={definition.blank}
-			/>
-		{:else if definition.type == 'text-area'}
-			<InputText
-				bind:value={doc[definition.key]}
-				on:input={onInput}
-				label={definition.label}
-				labelSize={100 / 3}
-				disabled={isDisabled}
-				affix={definition.key_description ? doc[definition.key_description] : null}
-				align={definition.align}
-				required={definition.required}
-				rows={definition.rows}
-			/>
-		{:else if definition.type == 'computed'}
-			<InputComputed
-				value={definition.fn ? definition.fn(meta, doc) : doc[definition.key]}
-				label={definition.label}
-				labelSize={100 / 3}
-				disabled={isDisabled}
-				affix={definition.key_description ? doc[definition.key_description] : null}
-				align={definition.align}
-				dataType={definition.format}
-				decimals={definition.decimals}
-			/>
-		{:else}
-			<div class="text-red-600">UNKNOWN FIELD TYPE</div>
-		{/if}
-	</div>
+<div class="flex flex-col w-full">
+	{#if definition.type == 'text' || definition.type == 'email' || definition.type == 'date' || definition.type == 'password' || definition.type == 'search' || definition.type == 'tel' || definition.type == 'time' || definition.type == 'url'}
+		<Input
+			bind:value={doc[definition.key]}
+			on:input={onInput}
+			label={definition.label}
+			labelSize={100 / 3}
+			disabled={isDisabled}
+			align={definition.align}
+			type={definition.type}
+			required={definition.required}
+			upper={definition.upper}
+		/>
+	{:else if definition.type == 'check'}
+		<InputCheck
+			bind:value={doc[definition.key]}
+			on:input={onInput}
+			label={definition.label}
+			labelSize={100 / 3}
+			disabled={isDisabled}
+			align={definition.align}
+		/>
+	{:else if definition.type == 'dropdown'}
+		<InputDropdown
+			bind:value={doc[definition.key]}
+			on:input={onInput}
+			label={definition.label}
+			labelSize={100 / 3}
+			disabled={isDisabled}
+			align={definition.align}
+			required={definition.required}
+			upper={definition.upper}
+			options={definition.options(meta, doc)}
+		/>
+	{:else if definition.type == 'number'}
+		<InputNumber
+			bind:value={doc[definition.key]}
+			on:input={onInput}
+			label={definition.label}
+			labelSize={100 / 3}
+			disabled={isDisabled}
+			align={definition.align}
+			required={definition.required}
+			step={definition.step}
+			min={definition.min}
+			max={definition.max}
+		/>
+	{:else if definition.type == 'option'}
+		<InputOption
+			bind:value={doc[definition.key]}
+			on:input={onInput}
+			label={definition.label}
+			labelSize={100 / 3}
+			disabled={isDisabled}
+			col={definition.col}
+			options={definition.options(meta, doc)}
+			blank={definition.blank}
+		/>
+	{:else if definition.type == 'option-multi'}
+		<InputOptionMulti
+			bind:value={doc[definition.key]}
+			on:input={onInput}
+			label={definition.label}
+			labelSize={100 / 3}
+			disabled={isDisabled}
+			col={definition.col}
+			options={definition.options(meta, doc)}
+			blank={definition.blank}
+		/>
+	{:else if definition.type == 'text-area'}
+		<InputText
+			bind:value={doc[definition.key]}
+			on:input={onInput}
+			label={definition.label}
+			labelSize={100 / 3}
+			disabled={isDisabled}
+			align={definition.align}
+			required={definition.required}
+			rows={definition.rows}
+		/>
+	{:else if definition.type == 'computed'}
+		<InputComputed
+			value={definition.fn ? definition.fn(meta, doc) : doc[definition.key]}
+			label={definition.label}
+			labelSize={100 / 3}
+			align={definition.align}
+			dataType={definition.format}
+			decimals={definition.decimals}
+		/>
+	{:else}
+		<div class="text-red-600">UNKNOWN FIELD TYPE</div>
+	{/if}
+	{#if definition.key_description}
+		<div class="w-full flex pb-3">
+			<div class="w-0 sm:w-1/3">&nbsp;</div>
+			<div class="px-1 w-full border border-transparent dark:text-stone-300">
+				{doc[definition.key_description] ?? ''}
+			</div>
+		</div>
+	{/if}
 </div>

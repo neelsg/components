@@ -11,6 +11,11 @@
 				click: () => {
 					disabled = !disabled;
 				}
+			},
+			{
+				label: 'Submit',
+				color: 'yellow',
+				submit: true
 			}
 		],
 		sections: [
@@ -92,20 +97,22 @@
 					{
 						type: 'text',
 						key: 'testF1',
-						label: 'Test Field 1',
-						key_description: 'testF5'
+						label: 'Test Field 1'
+					},
+					{
+						type: 'computed',
+						key: 'testF1',
+						label: 'Test Field 1 C'
 					},
 					{
 						type: 'computed',
 						key: 'testF2',
-						label: 'Test Field 2',
-						key_description: 'testF2D'
+						label: 'Test Field 2'
 					},
 					{
 						type: 'computed',
 						key: 'testF3',
-						label: 'Test Field 3',
-						key_description: 'testF3D'
+						label: 'Test Field 3'
 					},
 					{
 						type: 'number',
@@ -118,6 +125,12 @@
 						key: 'testF5',
 						label: 'Test Field 5',
 						unique: true
+					},
+					{
+						type: 'check',
+						key: 'testF6',
+						label: 'Y/N',
+						align: 'center'
 					}
 				],
 				actions: [
@@ -178,6 +191,12 @@
 	};
 	let doc = { testFD: 'Hii', testF2: '2023-11-26' };
 	let disabled = false;
+
+	const submit = () => {
+		toast.add('Form submitted', 'blue');
+	};
 </script>
 
-<Form {definition} {meta} {disabled} bind:doc />
+<form on:submit|preventDefault|stopPropagation={submit}>
+	<Form {definition} {meta} {disabled} bind:doc />
+</form>

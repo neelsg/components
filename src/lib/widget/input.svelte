@@ -23,7 +23,6 @@ Text input
 	export let used: string[] = []; // use to validate that you don't have duplicates
 	export let upper: boolean = false; // automatically make input value uppercase
 	export let space: boolean = false; // add some padding around the input
-	export let affix: string = ''; // any text to the right of the field
 
 	let element: HTMLInputElement | null = null;
 	const dispatch = createEventDispatcher();
@@ -58,32 +57,27 @@ Text input
 			{label}
 		</div>
 	{/if}
-	<div class="w-full flex flex-wrap sm:flex-nowrap">
-		<input
-			class="p-1 w-full rounded border transition-colors
-				{align == 'center' ? 'text-center' : align == 'right' ? 'text-right' : 'text-left'}
-				{disabled
-				? 'border-stone-400 dark:border-stone-700 text-stone-700 dark:text-stone-300'
-				: 'border-stone-900 dark:border-stone-200 text-black dark:text-white'}
-				{disabled
-				? 'bg-transparent'
-				: 'bg-white hover:bg-stone-100 dark:bg-stone-800 dark:hover:bg-stone-700'}
-				invalid:border-red-600 dark:invalid:border-red-400
-			"
-			on:input={input}
-			{type}
-			{name}
-			id={name}
-			{required}
-			{disabled}
-			{placeholder}
-			{form}
-			{pattern}
-			value={value ?? ''}
-			bind:this={element}
-		/>
-		{#if affix}
-			<div class="w-full p-1 font-semibold">{affix}</div>
-		{/if}
-	</div>
+	<input
+		class="p-1 w-full rounded border transition-colors
+			{align == 'center' ? 'text-center' : align == 'right' ? 'text-right' : 'text-left'}
+			{disabled
+			? 'border-stone-400 dark:border-stone-700 text-stone-700 dark:text-stone-300'
+			: 'border-stone-900 dark:border-stone-200 text-black dark:text-white'}
+			{disabled
+			? 'bg-transparent'
+			: 'bg-white hover:bg-stone-100 dark:bg-stone-800 dark:hover:bg-stone-700'}
+			invalid:border-red-600 dark:invalid:border-red-400
+		"
+		on:input={input}
+		{type}
+		{name}
+		id={name}
+		{required}
+		{disabled}
+		{placeholder}
+		{form}
+		{pattern}
+		value={value ?? ''}
+		bind:this={element}
+	/>
 </label>

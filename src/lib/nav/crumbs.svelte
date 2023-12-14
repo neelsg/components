@@ -19,7 +19,18 @@
 
 <div class="flex flex-wrap">
 	{#each crumbNodes as n, i}
-		{#if i == crumbNodes.length - 1}
+		{#if i == 0}
+			{#if n.url}
+				<Link href={n.url} upper={false} compact>
+					<CrumbText node={n} heading />
+				</Link>
+			{:else}
+				<CrumbText node={n} heading />
+			{/if}
+			{#if crumbNodes.length}
+				<div class="p-1 text-stone-500">/</div>
+			{/if}
+		{:else if i == crumbNodes.length - 1}
 			<CrumbText node={n} heading />
 		{:else}
 			<div class="flex items-center">

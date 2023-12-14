@@ -21,7 +21,6 @@ Numeric input
 	export let disabled: boolean = false; // disable the input
 	export let required: boolean = false; // make the input required
 	export let space: boolean = false; // add some padding around the input
-	export let affix: string = ''; // any text to the right of the field
 
 	const dispatch = createEventDispatcher();
 	const input = () => {
@@ -39,34 +38,29 @@ Numeric input
 			{label}
 		</div>
 	{/if}
-	<div class="w-full flex flex-wrap sm:flex-nowrap">
-		<input
-			class="p-1 w-full rounded border transition-colors
-				{align == 'center' ? 'text-center' : align == 'right' ? 'text-right' : ''}
-				{disabled
-				? 'border-stone-400 dark:border-stone-700 text-stone-700 dark:text-stone-300'
-				: 'border-stone-900 dark:border-stone-200 text-black dark:text-white'}
-				{disabled
-				? 'bg-transparent'
-				: 'bg-white hover:bg-stone-100 dark:bg-stone-800 dark:hover:bg-stone-700'}
-				invalid:border-red-600 dark:invalid:border-red-400
-				[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
-			"
-			on:input={input}
-			{name}
-			id={name}
-			{step}
-			type="number"
-			{required}
-			{disabled}
-			{placeholder}
-			{form}
-			{min}
-			{max}
-			bind:value
-		/>
-		{#if affix}
-			<div class="w-full p-1 font-semibold">{affix}</div>
-		{/if}
-	</div>
+	<input
+		class="p-1 w-full rounded border transition-colors
+			{align == 'center' ? 'text-center' : align == 'right' ? 'text-right' : ''}
+			{disabled
+			? 'border-stone-400 dark:border-stone-700 text-stone-700 dark:text-stone-300'
+			: 'border-stone-900 dark:border-stone-200 text-black dark:text-white'}
+			{disabled
+			? 'bg-transparent'
+			: 'bg-white hover:bg-stone-100 dark:bg-stone-800 dark:hover:bg-stone-700'}
+			invalid:border-red-600 dark:invalid:border-red-400
+			[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
+		"
+		on:input={input}
+		{name}
+		id={name}
+		{step}
+		type="number"
+		{required}
+		{disabled}
+		{placeholder}
+		{form}
+		{min}
+		{max}
+		bind:value
+	/>
 </label>

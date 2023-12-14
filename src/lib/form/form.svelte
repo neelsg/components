@@ -66,7 +66,6 @@
 						data += '\t';
 					}
 					data += f.label;
-					if (f.key_description) data += '\t';
 				}
 				data += '\n';
 				for (const i of formDetailFilterEmpty(s, doc)) {
@@ -79,7 +78,6 @@
 							data += '\t';
 						}
 						data += formDetailFieldValue(f, meta, doc, i) ?? '';
-						if (f.key_description) data += '\t' + (i[f.key_description] ?? '');
 					}
 					data += '\n';
 				}
@@ -95,7 +93,6 @@
 						if (t[f.key]) {
 							data += t[f.key](meta, doc);
 						}
-						if (f.key_description) data += '\t';
 					}
 					data += '\n';
 				}

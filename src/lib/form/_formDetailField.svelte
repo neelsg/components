@@ -56,7 +56,6 @@
 
 	export type formDetailField = {
 		key: string;
-		key_description?: string;
 		label: string;
 		align?: 'left' | 'center' | 'right';
 		hide?: (meta: unknown, doc: unknown) => boolean;
@@ -139,7 +138,6 @@
 		bind:value={item[definition.key]}
 		on:input={onInput}
 		disabled={disabled || (definition.disable && definition.disable(meta, doc, item))}
-		affix={definition.key_description ? item[definition.key_description] : null}
 		align={definition.align}
 		type={definition.type}
 		upper={definition.upper}
@@ -151,7 +149,6 @@
 		bind:value={item[definition.key]}
 		on:input={onInput}
 		disabled={disabled || (definition.disable && definition.disable(meta, doc, item))}
-		affix={definition.key_description ? item[definition.key_description] : null}
 		align={definition.align}
 	/>
 {:else if definition.type == 'dropdown'}
@@ -159,7 +156,6 @@
 		bind:value={item[definition.key]}
 		on:input={onInput}
 		disabled={disabled || (definition.disable && definition.disable(meta, doc, item))}
-		affix={definition.key_description ? item[definition.key_description] : null}
 		align={definition.align}
 		upper={definition.upper}
 		options={definition.options(meta, doc, item)}
@@ -171,7 +167,6 @@
 		bind:value={item[definition.key]}
 		on:input={onInput}
 		disabled={disabled || (definition.disable && definition.disable(meta, doc, item))}
-		affix={definition.key_description ? item[definition.key_description] : null}
 		align={definition.align}
 		step={definition.step}
 		min={definition.min}
@@ -183,7 +178,6 @@
 		bind:value={item[definition.key]}
 		on:input={onInput}
 		disabled={disabled || (definition.disable && definition.disable(meta, doc, item))}
-		affix={definition.key_description ? item[definition.key_description] : null}
 		col={definition.col}
 		options={definition.options(meta, doc, item)}
 		blank={definition.blank}
@@ -193,7 +187,6 @@
 		bind:value={item[definition.key]}
 		on:input={onInput}
 		disabled={disabled || (definition.disable && definition.disable(meta, doc, item))}
-		affix={definition.key_description ? item[definition.key_description] : null}
 		col={definition.col}
 		options={definition.options(meta, doc, item)}
 		blank={definition.blank}
@@ -201,8 +194,6 @@
 {:else if definition.type == 'computed'}
 	<InputComputed
 		value={definition.fn ? definition.fn(meta, doc, item) : item[definition.key]}
-		disabled={disabled || (definition.disable && definition.disable(meta, doc, item))}
-		affix={definition.key_description ? item[definition.key_description] : null}
 		align={definition.align}
 		dataType={definition.format}
 		decimals={definition.decimals}
