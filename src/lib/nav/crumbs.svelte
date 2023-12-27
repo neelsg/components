@@ -21,13 +21,13 @@
 	{#each crumbNodes as n, i}
 		{#if i == 0}
 			{#if n.url}
-				<Link href={n.url} upper={false} compact>
+				<Link href={n.url} color="blue" upper={false} compact>
 					<CrumbText node={n} heading />
 				</Link>
 			{:else}
 				<CrumbText node={n} heading />
 			{/if}
-			{#if crumbNodes.length}
+			{#if crumbNodes.length > 1}
 				<div class="p-1 text-stone-500">/</div>
 			{/if}
 		{:else if i == crumbNodes.length - 1}

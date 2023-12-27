@@ -210,7 +210,7 @@
 		<div class="text-red-600">UNKNOWN FIELD TYPE</div>
 	{/if}
 	{#if definition.key_description}
-		<div class="w-full flex pb-3">
+		<div class="w-full flex pb-2">
 			<div class="w-0 sm:w-1/3">&nbsp;</div>
 			<div class="px-1 w-full border border-transparent dark:text-stone-300">
 				{doc[definition.key_description] ?? ''}

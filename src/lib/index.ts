@@ -21,6 +21,7 @@ import Shortcuts, { shortcuts } from './nav/shortcuts.svelte';
 import Report, { type report } from './report/report.svelte';
 import type { reportItem } from './report/_reportItem.svelte';
 import { colorBasic, colorFull } from './util/color.js';
+import { docStore } from './util/doc';
 import Theme, { theme } from './util/theme.svelte';
 import Toast, { toast } from './util/toast.svelte';
 import Wait, { wait } from './util/wait.svelte';
@@ -58,6 +59,7 @@ export {
 	colorBasic,
 	colorFull,
 	Crumbs,
+	docStore,
 	Error,
 	Form,
 	type form,
@@ -97,8 +99,8 @@ export {
 	Pdf,
 	type pdfAsyncContent,
 	type pdfContent,
-	type pdfOptions,
 	pdfDataUrl,
+	type pdfOptions,
 	pdfPageNumbers,
 	Popup,
 	Report,

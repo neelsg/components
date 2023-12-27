@@ -20,11 +20,13 @@
 			pageOrientation?: pdfPageOrientation;
 		} | null;
 		copy?: (meta: unknown, doc: unknown) => boolean;
+		store?: string;
 	};
 </script>
 
 <script lang="ts">
 	import { toast } from '../util/toast.svelte';
+	import { docStore } from '../util/doc';
 	import { formDetailFilterEmpty } from './_formDetail.svelte';
 	import { formBlockFieldValue } from './_formBlockField.svelte';
 	import { formDetailFieldValue } from './_formDetailField.svelte';
@@ -41,6 +43,26 @@
 	export let disabled: boolean = false;
 
 	$: cancelled = (definition.cancelled && definition.cancelled(meta, doc)) ?? false;
+
+	let storeLoaded: boolean = false;
+	$: storeDocument(doc);
+	const storeDocument = (d: { [key: string]: any }) => {
+		if (!definition.store) return;
+
+		if (!storeLoaded) {
+			doc = docStore.load(definition.store, d);
+			storeLoaded = true;
+			return;
+		}
+
+		docStore.store(definition.store, d);
+	};
+
+	const clearDocument = () => {
+		if (!definition.store) return;
+
+		doc = docStore.clear(definition.store);
+	};
 
 	const copyToClipboard = () => {
 		let data = definition.title + (cancelled ? ' CANCELLED' : '') + '\n';
@@ -255,6 +277,13 @@
 						{/if}
 					{/if}
 				{/each}
+				{#if definition.store}
+					<div class="p-0.5">
+						<Button on:click={clearDocument}>
+							<div class="w-24">Clear</div>
+						</Button>
+					</div>
+				{/if}
 				{#if definition.print && definition.print(meta, doc)}
 					<div class="p-0.5">
 						<Button color="blue" on:click={printToPdf}>
