@@ -85,6 +85,17 @@ An input box with a popup that will display the available values
 		return false;
 	};
 
+	const keyDown = (e: KeyboardEvent) => {
+		if (e.key == 'ArrowUp') {
+			e.preventDefault();
+			listOpen();
+			setTimeout(() => {
+				filterInput.focus();
+			}, 1);
+		}
+	};
+
+	let filterInput: HTMLInputElement;
 	let windowWidth: number = 0;
 </script>
 
@@ -107,6 +118,7 @@ An input box with a popup that will display the available values
 	>
 		<input
 			on:input={input}
+			on:keydown={keyDown}
 			class="p-1 w-full rounded-l
 				{align == 'center' ? 'text-center' : align == 'right' ? 'text-right' : 'text-left'}
 				{disabled
@@ -126,6 +138,7 @@ An input box with a popup that will display the available values
 		/>
 		{#if !disabled}
 			<button
+				tabindex="-1"
 				on:click|preventDefault={listOpen}
 				class="p-1 pl-2 rounded-r bg-transparent transition-colors
 					hover:bg-stone-200 dark:hover:bg-stone-600
@@ -141,6 +154,7 @@ An input box with a popup that will display the available values
 		bind:close={listClose}
 		on:closed={() => {
 			filterText = '';
+			element.focus();
 		}}
 	>
 		<div slot="top" class="flex">
@@ -151,7 +165,12 @@ An input box with a popup that will display the available values
 				<div class="p-1">
 					<Icon key="funnel" />
 				</div>
-				<Input type="search" bind:value={filterText} placeholder="Filter..." />
+				<Input
+					bind:element={filterInput}
+					type="search"
+					bind:value={filterText}
+					placeholder="Filter..."
+				/>
 			</div>
 		</div>
 		<div class="flex flex-col w-full">

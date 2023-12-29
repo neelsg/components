@@ -12,6 +12,11 @@
 						{ type: 'text', label: 'Test Field 1', key: 'f2' }
 					]
 				]
+			},
+			{
+				type: 'detail',
+				key: 'det',
+				fields: [{ type: 'text', label: 'Test F1', key: 'f1' }]
 			}
 		],
 		store: 'testDoc',

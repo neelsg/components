@@ -23,8 +23,8 @@ Text input
 	export let used: string[] = []; // use to validate that you don't have duplicates
 	export let upper: boolean = false; // automatically make input value uppercase
 	export let space: boolean = false; // add some padding around the input
+	export let element: HTMLInputElement | null = null;
 
-	let element: HTMLInputElement | null = null;
 	const dispatch = createEventDispatcher();
 	const updateValidity = (value: string): void => {
 		if (!value) {

@@ -25,6 +25,12 @@ A modal popup
 	let opened: boolean = false;
 	let windowHeight: number;
 	let outlineDiv: HTMLDivElement;
+
+	const keyDown = (e: KeyboardEvent) => {
+		if (e.key == 'Escape') {
+			close();
+		}
+	};
 </script>
 
 {#if opened}
@@ -35,6 +41,7 @@ A modal popup
 			bind:clientHeight={windowHeight}
 			bind:this={outlineDiv}
 			on:click={close}
+			on:keydown={keyDown}
 			transition:fade={{ duration: 150 }}
 			class="fixed inset-0 z-10 bg-black bg-opacity-30 dark:bg-opacity-60
         p-4 sm:py-8 sm:px-12 md:px-20 lg:px-40

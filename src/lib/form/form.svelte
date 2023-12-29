@@ -42,6 +42,13 @@
 	export let doc: { [key: string]: any };
 	export let disabled: boolean = false;
 
+	export const clear = () => {
+		if (!definition.store) return;
+
+		doc = docStore.clear(definition.store);
+		definition = definition;
+	};
+
 	$: cancelled = (definition.cancelled && definition.cancelled(meta, doc)) ?? false;
 
 	let storeLoaded: boolean = false;
@@ -56,12 +63,6 @@
 		}
 
 		docStore.store(definition.store, d);
-	};
-
-	const clearDocument = () => {
-		if (!definition.store) return;
-
-		doc = docStore.clear(definition.store);
 	};
 
 	const copyToClipboard = () => {
@@ -178,6 +179,12 @@
 							{ text: f.label, bold: true },
 							{ text: formBlockFieldValue(f, meta, doc) ?? ' ', alignment: f.align }
 						]);
+						if (f.key_description) {
+							col.table.body.push([
+								{ text: ' ', bold: true },
+								{ text: doc[f.key_description] ?? ' ', alignment: f.align }
+							]);
+						}
 					}
 					block.columns.push(col);
 				}
@@ -279,7 +286,7 @@
 				{/each}
 				{#if definition.store}
 					<div class="p-0.5">
-						<Button on:click={clearDocument}>
+						<Button on:click={clear}>
 							<div class="w-24">Clear</div>
 						</Button>
 					</div>

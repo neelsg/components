@@ -39,7 +39,11 @@
 							type: 'text',
 							key: 'testF',
 							label: 'Test Field',
-							key_description: 'testFD'
+							key_description: 'testFD',
+							input: (meta: unknown, doc: unknown) => {
+								const d = doc as { testF: string; testFD: string };
+								d.testFD = d.testF ? 'Hii' : '';
+							}
 						},
 						{
 							type: 'date',
@@ -189,7 +193,7 @@
 	const meta = {
 		cancelled: false
 	};
-	let doc = { testFD: 'Hii', testF2: '2023-11-26' };
+	let doc = { testF2: '2023-11-26' };
 	let disabled = false;
 
 	const submit = () => {

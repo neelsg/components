@@ -1,3 +1,5 @@
+import { page } from '$app/stores';
+import { get } from 'svelte/store';
 import type { iconPaths } from '../widget/icon.svelte';
 import type { colorFull } from '../util/color.js';
 
@@ -14,6 +16,15 @@ export type navNode = {
 };
 
 export const nav = {
+	getRoute: (url: string | null): string | null => {
+		const p = get(page);
+		let u = p.route.id ?? '';
+		if ((url ?? '') != u) return url;
+		for (const [k, v] of Object.entries(p.params)) {
+			u = u.replace(`[${k}]`, v);
+		}
+		return u;
+	},
 	getVisible: (nodes: navNode[], context: unknown): navNode[] => {
 		// Filter out any nodes that should be hidden
 		return nodes.filter((n) => !n.hide || !n.hide(context));
@@ -21,8 +32,9 @@ export const nav = {
 	getCurrent: (url: string | null, nodes: navNode[], context: unknown): navNode | null => {
 		// Get a node based on it's URL. This is useful if you need node information for the current page
 		if (!url) return null;
+		const r = nav.getRoute(url);
 		for (const n of nodes) {
-			if (url == n.url) {
+			if (url == n.url || r == n.url) {
 				return n;
 			}
 			if (n.children) {
@@ -40,8 +52,9 @@ export const nav = {
 	): navNode[] | null => {
 		// Get a list of the nodes that are parents for the node with a given URL. This is useful for crumbs
 		if (!url) return [];
+		const r = nav.getRoute(url);
 		for (const n of nodes) {
-			if (url == n.url) {
+			if (url == n.url || r == n.url) {
 				return [...(parents || []), n];
 			}
 			if (n.children) {
