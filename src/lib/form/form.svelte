@@ -51,18 +51,24 @@
 
 	$: cancelled = (definition.cancelled && definition.cancelled(meta, doc)) ?? false;
 
-	let storeLoaded: boolean = false;
-	$: storeDocument(doc);
-	const storeDocument = (d: { [key: string]: any }) => {
-		if (!definition.store) return;
+	let storeLoaded: string | null = null;
+	$: storeDocument(doc, definition);
+	const storeDocument = (d: { [key: string]: any }, f: form) => {
+		if (!f || !f.store) return;
 
 		if (!storeLoaded) {
-			doc = docStore.load(definition.store, d);
-			storeLoaded = true;
+			doc = docStore.load(f.store, d);
+			storeLoaded = f.store;
 			return;
 		}
 
-		docStore.store(definition.store, d);
+		if (storeLoaded != f.store) {
+			doc = docStore.load(f.store, docStore.getBlank(storeLoaded));
+			storeLoaded = f.store;
+			return;
+		}
+
+		docStore.store(f.store, d);
 	};
 
 	const copyToClipboard = () => {

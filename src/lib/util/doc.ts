@@ -30,5 +30,11 @@ export const docStore = {
 			return JSON.parse(blanks[key] || '{}');
 		}
 		return {};
+	},
+	getBlank: (key: string): { [key: string]: unknown } => {
+		if (browser) {
+			return JSON.parse(blanks[key] || '{}');
+		}
+		return {};
 	}
 };
