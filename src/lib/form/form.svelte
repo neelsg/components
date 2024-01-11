@@ -276,14 +276,14 @@
         {cancelled ? 'text-red-700 dark:text-red-500 border-red-500' : 'border-transparent'}
       "
 		>
-			<div class="flex p-0.5">
+			<div class="flex flex-wrap p-0.5">
 				{#if definition.icon}<div class="pr-2 py-0.5"><Icon key={definition.icon} /></div>{/if}
 				<div class="text-lg">{definition.title}</div>
 			</div>
 			{#if cancelled}
 				<div>CANCELLED</div>
 			{/if}
-			<div class="flex">
+			<div class="flex flex-wrap">
 				<slot name="top" />
 				{#each definition.actions ?? [] as a}
 					{#if !disabled || a.no_disable}

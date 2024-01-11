@@ -6,6 +6,7 @@
 		label?: string;
 		icon?: keyof typeof iconPaths;
 		color?: (typeof colorBasic)[number];
+		next?: (item: unknown) => void;
 		hide?: (meta: unknown, doc: unknown) => boolean;
 		no_disable?: boolean;
 	};
@@ -47,6 +48,8 @@
 		doc[definition.key][doc[definition.key].length - 1] = popup;
 		doc[definition.key] = [...doc[definition.key], {}];
 		popup = {};
+
+		if (definition.popup?.next) definition.popup.next(popup);
 	};
 </script>
 
@@ -63,11 +66,11 @@
 
 <Popup bind:open>
 	<div class="flex" slot="top">
-		<div class="py-2 pr-4 font-semibold text-lg">{definition.title}</div>
+		<div class="py-2 pr-4 font-semibold text-lg">{definition.popup?.label ?? definition.title}</div>
 		{#each detailActions as a}
 			{#if !disabled || a.no_disable}
 				{#if !(a.hide && a.hide(meta, doc))}
-					<FormDetailPopupAction definition={a} bind:item={popup} />
+					<FormDetailPopupAction definition={a} bind:item={popup} {meta} bind:doc {disabled} />
 				{/if}
 			{/if}
 		{/each}

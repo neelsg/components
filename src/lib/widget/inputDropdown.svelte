@@ -43,15 +43,15 @@ An input box with a popup that will display the available values
 
 	$: updated(value);
 	const updated = (value: string) => {
-		if (!value || !validate) {
+		if (!value) {
 			element?.setCustomValidity('');
 			return;
 		}
-		if (options.map((x) => x[0]).includes(value)) {
-			if (used.includes(value)) {
-				element?.setCustomValidity('This value was already used elsewhere.');
-				return;
-			}
+		if (used.includes(value)) {
+			element?.setCustomValidity('This value was already used elsewhere.');
+			return;
+		}
+		if (!validate || options.map((x) => x[0]).includes(value)) {
 			element?.setCustomValidity('');
 			return;
 		}

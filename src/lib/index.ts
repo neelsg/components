@@ -4,6 +4,7 @@ import type { formBlockField } from './form/_formBlockField.svelte';
 import type { formDetail } from './form/_formDetail.svelte';
 import type { formDetailAction } from './form/_formDetailAction.svelte';
 import type { formDetailField } from './form/_formDetailField.svelte';
+import type { formDetailPopup } from './form/_formDetailPopup.svelte';
 import Form, { type form } from './form/form.svelte';
 import Error from './layout/error.svelte';
 import Header from './layout/header.svelte';
@@ -69,6 +70,7 @@ export {
 	type formDetail,
 	type formDetailAction,
 	type formDetailField,
+	type formDetailPopup,
 	Header,
 	Icon,
 	iconPaths,

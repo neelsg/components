@@ -157,7 +157,16 @@
 			{/if}
 			{#each detailActions as a}
 				<td class="w-7">
-					<FormDetailAction definition={a} {meta} bind:doc bind:item={r} {disabled} />
+					<FormDetailAction
+						definition={a}
+						sectionKey={definition.key}
+						index={i}
+						{meta}
+						bind:doc
+						bind:item={r}
+						{disabled}
+						{fixed}
+					/>
 				</td>
 			{/each}
 			{#each fields as f}

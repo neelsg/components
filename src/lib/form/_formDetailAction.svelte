@@ -22,14 +22,24 @@
 	export let doc: { [key: string]: any };
 	export let item: any;
 	export let disabled: boolean;
+	export let fixed: boolean = false;
+	export let index: number;
+	export let sectionKey: string;
+
+	const onClick = () => {
+		if (!fixed && index == doc[sectionKey].length - 1) {
+			doc[sectionKey] = [...doc[sectionKey], {}];
+		}
+
+		definition.click(item);
+		doc = doc;
+	};
 </script>
 
 <ButtonText
 	compact
 	color={definition.color}
-	on:click={() => {
-		definition.click(item);
-	}}
+	on:click={onClick}
 	disabled={(disabled && !definition.no_disable) ||
 		(definition.disable && definition.disable(meta, doc, item))}
 >
