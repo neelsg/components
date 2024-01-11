@@ -41,6 +41,7 @@
 	export let meta: unknown = null;
 	export let doc: { [key: string]: any };
 	export let disabled: boolean = false;
+	export let popups: { [key: string]: any } = {};
 
 	export const clear = () => {
 		if (!definition.store) return;
@@ -283,6 +284,7 @@
 				<div>CANCELLED</div>
 			{/if}
 			<div class="flex">
+				<slot name="top" />
 				{#each definition.actions ?? [] as a}
 					{#if !disabled || a.no_disable}
 						{#if !a.hide || !a.hide(meta, doc)}
@@ -320,7 +322,9 @@
 			{#if s.type == 'block'}
 				<FormBlock definition={s} {meta} {disabled} bind:doc />
 			{:else if s.type == 'detail'}
-				<FormDetail definition={s} {meta} {disabled} bind:doc />
+				<FormDetail definition={s} {meta} {disabled} bind:doc bind:popup={popups[s.key]}>
+					<slot name="popup" slot="popup" />
+				</FormDetail>
 			{:else}
 				<div class="text-red-600">UNKNOWN SECTION TYPE</div>
 			{/if}

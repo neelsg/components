@@ -2,6 +2,7 @@
 	import type { formDetailField } from './_formDetailField.svelte';
 	import type { formAction } from './_formAction.svelte';
 	import type { formDetailAction } from './_formDetailAction.svelte';
+	import type { formDetailPopup } from './_formDetailPopup.svelte';
 
 	export type formDetail = {
 		type: 'detail';
@@ -15,6 +16,7 @@
 		detail_actions?: formDetailAction[];
 		fixed?: (meta: unknown, doc: unknown) => boolean;
 		hide?: (meta: unknown, doc: unknown) => boolean;
+		popup?: formDetailPopup;
 	};
 
 	export const formDetailFilterEmpty = (
@@ -36,6 +38,7 @@
 	import FormAction from './_formAction.svelte';
 	import FormDetailAction from './_formDetailAction.svelte';
 	import FormDetailField from './_formDetailField.svelte';
+	import FormDetailPopup from './_formDetailPopup.svelte';
 	import ButtonText from '../widget/buttonText.svelte';
 	import Icon from '../widget/icon.svelte';
 
@@ -43,6 +46,7 @@
 	export let meta: unknown;
 	export let doc: { [key: string]: any };
 	export let disabled: boolean;
+	export let popup: any = {};
 
 	$: init(definition);
 	const init = (def: formDetail) => {
@@ -97,6 +101,13 @@
 <div class="flex justify-between w-full border-t border-stone-500">
 	<div class="text-lg font-semibold p-1">{definition.title || ''}</div>
 	<div class="flex">
+		{#if definition.popup && !(definition.popup.hide && definition.popup.hide(meta, doc))}
+			{#if (!disabled || definition.popup.no_disable) && (!definition.fixed || !definition.fixed(meta, doc))}
+				<FormDetailPopup {definition} bind:doc bind:popup {meta} {disabled}>
+					<slot name="popup" slot="popup" />
+				</FormDetailPopup>
+			{/if}
+		{/if}
 		{#each definition.actions ?? [] as a}
 			{#if !disabled || a.no_disable}
 				{#if !(a.hide && a.hide(meta, doc))}

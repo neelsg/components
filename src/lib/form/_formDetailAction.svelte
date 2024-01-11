@@ -3,6 +3,7 @@
 	import type { colorBasic } from '../util/color';
 
 	export type formDetailAction = {
+		label?: string;
 		icon: keyof typeof iconPaths;
 		color?: (typeof colorBasic)[number];
 		click: (item: unknown) => void;

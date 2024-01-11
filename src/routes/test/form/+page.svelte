@@ -101,7 +101,8 @@
 					{
 						type: 'text',
 						key: 'testF1',
-						label: 'Test Field 1'
+						label: 'Test Field 1',
+						unique: true
 					},
 					{
 						type: 'computed',
@@ -168,8 +169,19 @@
 						color: 'green',
 						icon: 'arrow-right',
 						click: (i) => toast.add(((i as { testF2?: number }).testF2 ?? 0).toString(), 'green')
+					},
+					{
+						color: 'blue',
+						label: 'Hi',
+						icon: 'archive-box',
+						click: (i) => toast.add(JSON.stringify(i), 'green')
 					}
-				]
+				],
+				popup: {
+					label: 'Popup',
+					color: 'blue',
+					icon: 'scale'
+				}
 			}
 		],
 		icon: 'archive-box',
@@ -202,5 +214,8 @@
 </script>
 
 <form on:submit|preventDefault|stopPropagation={submit}>
-	<Form {definition} {meta} {disabled} bind:doc />
+	<Form {definition} {meta} {disabled} bind:doc>
+		<div class="bg-fuchsia-600" slot="top">Test slot</div>
+		<div class="bg-fuchsia-600" slot="popup">Test popup slot</div>
+	</Form>
 </form>

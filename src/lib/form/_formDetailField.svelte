@@ -19,6 +19,7 @@
 		upper?: boolean;
 		options: (meta: unknown, doc: unknown, item: unknown) => string[] | string[][];
 		unique?: boolean;
+		validate?: boolean;
 	};
 
 	type fieldNumber = {
@@ -160,6 +161,7 @@
 		upper={definition.upper}
 		options={definition.options(meta, doc, item)}
 		used={definition.unique ? fieldUsed(index, doc) : []}
+		validate={definition.validate}
 		{required}
 	/>
 {:else if definition.type == 'number'}

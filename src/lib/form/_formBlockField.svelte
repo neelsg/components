@@ -15,6 +15,7 @@
 		type: 'dropdown';
 		required?: boolean;
 		upper?: boolean;
+		validate?: boolean;
 		options: (meta: unknown, doc: unknown) => string[] | string[][];
 	};
 
@@ -149,6 +150,7 @@
 			align={definition.align}
 			required={definition.required}
 			upper={definition.upper}
+			validate={definition.validate}
 			options={definition.options(meta, doc)}
 		/>
 	{:else if definition.type == 'number'}
