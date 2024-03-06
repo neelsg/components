@@ -10,6 +10,7 @@ An input box with a popup that will display the available values
 	import Icon from './icon.svelte';
 	import Popup from './popup.svelte';
 	import Input from './input.svelte';
+	import ButtonText from './buttonText.svelte';
 
 	export let value: string = ''; // bind this to get the current value
 	export let label: string | null = null; // display a label for the input
@@ -25,6 +26,7 @@ An input box with a popup that will display the available values
 	export let used: string[] = []; // use to validate that you don't have duplicates
 	export let upper: boolean = false; // automatically make input value uppercase
 	export let space: boolean = false; // add some padding around the input
+	export let pageSize: number = 50;
 
 	const dispatch = createEventDispatcher();
 
@@ -68,6 +70,7 @@ An input box with a popup that will display the available values
 	};
 
 	let filterText = '';
+	$: filterOptions = options.filter((v) => filter(v, filterText));
 	const filter = (option: string | string[], filter: string): boolean => {
 		if (typeof option == 'string') {
 			if (used.includes(option)) return false;
@@ -83,6 +86,22 @@ An input box with a popup that will display the available values
 			if (col.toLocaleLowerCase().indexOf(s) > -1) return true;
 		}
 		return false;
+	};
+	let pageCurrent: number = 0;
+	let currentOptions: (string | string[])[] = [];
+	$: currentUpdate(filterOptions, pageCurrent, pageSize, filterText);
+	const currentUpdate = (
+		filterOptions: (string | string[])[],
+		pageCurrent: number,
+		pageSize: number,
+		filterText: string
+	) => {
+		currentOptions = filterOptions.slice(pageCurrent * pageSize, pageCurrent * pageSize + pageSize);
+	};
+	$: pageUpdate(pageCurrent, filterOptions);
+	const pageUpdate = (pageCurrent: number, filterOptions: (string | string[])[]) => {
+		if (pageCurrent > filterOptions.length / pageSize) pageCurrent = 0;
+		currentUpdate(filterOptions, pageCurrent, pageSize, filterText);
 	};
 
 	const keyDown = (e: KeyboardEvent) => {
@@ -174,33 +193,71 @@ An input box with a popup that will display the available values
 			</div>
 		</div>
 		<div class="flex flex-col w-full">
-			{#each options ?? [] as o}
-				{#if filter(o, filterText)}
-					<button
-						type="button"
-						on:click|preventDefault|stopPropagation={() => click(o)}
-						class="flex text-left w-full hover:bg-stone-200 dark:hover:bg-stone-700"
-					>
-						{#if typeof o == 'string'}
-							<div class="p-2 w-full">
-								{o || '-'}
+			{#each currentOptions ?? [] as o}
+				<button
+					type="button"
+					on:click|preventDefault|stopPropagation={() => click(o)}
+					class="flex text-left w-full hover:bg-stone-200 dark:hover:bg-stone-700"
+				>
+					{#if typeof o == 'string'}
+						<div class="p-2 w-full">
+							{o || '-'}
+						</div>
+					{:else}
+						{#each o as col, i}
+							<div
+								class="p-2 w-full
+									{i == 0 ? 'font-bold' : 'text-stone-600 dark:text-stone-400'}
+								"
+							>
+								{col || '-'}
 							</div>
-						{:else}
-							{#each o as col, i}
-								<div
-									class="p-2 w-full
-										{i == 0 ? 'font-bold' : 'text-stone-600 dark:text-stone-400'}
-									"
-								>
-									{col || '-'}
-								</div>
-							{/each}
-						{/if}
-					</button>
-				{/if}
+						{/each}
+					{/if}
+				</button>
 			{:else}
 				<tr><td> No items in selection </td></tr>
 			{/each}
+		</div>
+		<div class="flex justify-center items-center p-0.5 text-sm">
+			<div class="px-0.5">
+				<ButtonText
+					on:click={() => (pageCurrent -= 1)}
+					disabled={pageCurrent == 0}
+					color="blue"
+					compact
+				>
+					<Icon key="chevron-left" />
+				</ButtonText>
+			</div>
+			<div class="px-1">Page</div>
+			{#each [...Array(Math.ceil(filterOptions.length / pageSize)).keys()] as p}
+				<div class="px-0.5">
+					{#if pageCurrent == p}
+						<div
+							class="px-1.5 py-0.5 font-semibold rounded
+								bg-black dark:bg-white bg-opacity-10 dark:bg-opacity-10
+							"
+						>
+							{p + 1}
+						</div>
+					{:else}
+						<ButtonText on:click={() => (pageCurrent = p)} color="blue" compact>
+							<div class="px-1.5 py-0.5">{p + 1}</div>
+						</ButtonText>
+					{/if}
+				</div>
+			{/each}
+			<div class="px-0.5">
+				<ButtonText
+					on:click={() => (pageCurrent += 1)}
+					disabled={pageCurrent > filterOptions.length / pageSize - 1}
+					color="blue"
+					compact
+				>
+					<Icon key="chevron-right" />
+				</ButtonText>
+			</div>
 		</div>
 	</Popup>
 </label>
