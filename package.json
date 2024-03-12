@@ -1,6 +1,6 @@
 {
 	"name": "@neelsg/components",
-	"version": "0.0.37",
+	"version": "0.0.38",
 	"license": "MIT",
 	"description": "A Reusable SvelteKit Components Library",
 	"homepage": "https://github.com/neelsg/components",
@@ -60,6 +60,7 @@
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
+		"idb": "^8.0.0",
 		"pdfmake": "^0.2.8"
 	}
 }

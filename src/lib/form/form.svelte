@@ -43,10 +43,10 @@
 	export let disabled: boolean = false;
 	export let popups: { [key: string]: any } = {};
 
-	export const clear = () => {
+	export const clear = async () => {
 		if (!definition.store) return;
 
-		doc = docStore.clear(definition.store);
+		doc = await docStore.clear(definition.store);
 		definition = definition;
 	};
 
@@ -54,22 +54,22 @@
 
 	let storeLoaded: string | null = null;
 	$: storeDocument(doc, definition);
-	const storeDocument = (d: { [key: string]: any }, f: form) => {
+	const storeDocument = async (d: { [key: string]: any }, f: form) => {
 		if (!f || !f.store) return;
 
 		if (!storeLoaded) {
-			doc = docStore.load(f.store, d);
+			doc = await docStore.load(f.store, d);
 			storeLoaded = f.store;
 			return;
 		}
 
 		if (storeLoaded != f.store) {
-			doc = docStore.load(f.store, docStore.getBlank(storeLoaded));
+			doc = await docStore.load(f.store, docStore.getBlank(storeLoaded));
 			storeLoaded = f.store;
 			return;
 		}
 
-		docStore.store(f.store, d);
+		await docStore.store(f.store, d);
 	};
 
 	const copyToClipboard = () => {
