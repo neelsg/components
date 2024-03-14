@@ -219,7 +219,7 @@ An input box with a popup that will display the available values
 				<tr><td> No items in selection </td></tr>
 			{/each}
 		</div>
-		<div class="flex justify-center items-center p-0.5 text-sm">
+		<div class="flex flex-wrap justify-center items-center p-0.5 text-sm">
 			<div class="px-0.5">
 				<ButtonText
 					on:click={() => (pageCurrent -= 1)}

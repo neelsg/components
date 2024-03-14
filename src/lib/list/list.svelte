@@ -255,7 +255,7 @@
 	</table>
 	<div
 		class="
-    flex justify-center items-center p-0.5 text-sm rounded-b bg-stone-200 dark:bg-stone-800
+    flex flex-wrap justify-center items-center p-0.5 text-sm rounded-b bg-stone-200 dark:bg-stone-800
     border-x border-b border-stone-300 dark:border-stone-700
   "
 	>
