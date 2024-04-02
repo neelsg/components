@@ -1,30 +1,53 @@
 <script lang="ts" context="module">
 	import { writable, type Writable } from 'svelte/store';
 	import { wait } from '../util/wait.svelte';
+	import { dbConnect } from '../util/db';
+	import { browser } from '$app/environment';
 	import ShortcutNode from './_shortcutNode.svelte';
 
 	export const shortcuts = (() => {
 		const store: Writable<string[]> = writable([]);
 		return {
-			init: () => {
-				shortcuts.set(JSON.parse(localStorage.shortcuts || '[]'));
+			init: async (): Promise<void> => {
+				if (!browser) return;
+				if (!('indexedDB' in window)) return;
+
+				const db = await dbConnect();
+				let rec = await db.get('setting', 'shortcuts');
+				if (!rec) {
+					const local = JSON.parse(localStorage.shortcuts || '[]');
+					await db.put('setting', { key: 'shortcuts', value: local });
+					rec = { value: local };
+				}
+				store.set(rec.value);
 			},
-			add: (url: string): void => {
+			add: async (url: string): Promise<void> => {
+				if (!browser) return;
+				if (!('indexedDB' in window)) return;
+				localStorage.removeItem('shortcuts');
+
+				const db = await dbConnect();
 				store.update((n: string[]) => {
+					n = n.filter((v) => v);
 					if (n.includes(url)) return n;
 					n.push(url);
-					localStorage.shortcuts = JSON.stringify(n);
+					db.put('setting', { key: 'shortcuts', value: n });
 					return n;
 				});
 			},
-			remove: (url: string): void => {
+			remove: async (url: string): Promise<void> => {
+				if (!browser) return;
+				if (!('indexedDB' in window)) return;
+				localStorage.removeItem('shortcuts');
+
+				const db = await dbConnect();
 				store.update((n: string[]) => {
-					n = n.filter((n) => n != url);
-					localStorage.shortcuts = JSON.stringify(n);
+					n = n.filter((n) => n && n != url);
+					db.put('setting', { key: 'shortcuts', value: n });
 					return n;
 				});
 			},
-			navigate: (url: string): void => {
+			navigate: async (url: string): Promise<void> => {
 				shortcuts.add(url);
 				wait.navigate(url);
 			},

@@ -3,7 +3,7 @@ Computed inputs aren't really inputs at all, they just follow a similar style
 -->
 
 <script lang="ts">
-	import { formattedNumber } from '../util/number';
+	import { numberFormat } from '../util/number';
 	import Icon from './icon.svelte';
 
 	export let value: any; // this is the value that will be displayed
@@ -41,7 +41,7 @@ Computed inputs aren't really inputs at all, they just follow a similar style
 				<Icon key={value ? 'check' : 'x-mark'} />
 			</div>
 		{:else if dataType == 'number'}
-			{formattedNumber(value ?? 0, decimals)}
+			{numberFormat(value ?? 0, decimals)}
 		{:else if !value}
 			&nbsp;
 		{:else}

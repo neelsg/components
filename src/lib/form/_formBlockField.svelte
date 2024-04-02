@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import { formattedNumber } from '../util/number';
+	import { numberFormat } from '../util/number';
 
 	type fieldText = {
 		type: 'text' | 'email' | 'date' | 'password' | 'search' | 'tel' | 'time' | 'url';
@@ -82,11 +82,11 @@
 	): string => {
 		if (definition.type == 'computed') {
 			const v = definition.fn ? definition.fn(meta, doc) : doc[definition.key];
-			if (definition.format == 'number') return formattedNumber(v, definition.decimals ?? 0);
+			if (definition.format == 'number') return numberFormat(v, definition.decimals ?? 0);
 			if (definition.format == 'check') return v ? 'Yes' : 'No';
 		}
 		if (definition.type == 'number')
-			return formattedNumber(doc[definition.key] ?? 0, definition.decimals ?? 0);
+			return numberFormat(doc[definition.key] ?? 0, definition.decimals ?? 0);
 		if (definition.type == 'check') return doc[definition.key] ? 'Yes' : 'No';
 		return doc[definition.key] ?? '';
 	};

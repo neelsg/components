@@ -1,6 +1,6 @@
-import { openDB } from 'idb';
 import { browser } from '$app/environment';
 import { toast } from './toast.svelte';
+import { dbConnect } from './db';
 
 const blanks: { [key: string]: { [key: string]: unknown } } = {};
 
@@ -16,13 +16,7 @@ export const docStore = {
 			toast.add("This browser doesn't support IndexedDB");
 			return blank;
 		}
-		const db = await openDB('components', 1, {
-			upgrade: (db) => {
-				if (!db.objectStoreNames.contains('docs')) {
-					db.createObjectStore('doc', { keyPath: 'key' });
-				}
-			}
-		});
+		const db = await dbConnect();
 		const stored = await db.get('doc', key);
 		if (stored) return stored['value'];
 		return blank;
@@ -30,7 +24,7 @@ export const docStore = {
 	store: async (key: string, value: { [key: string]: unknown }): Promise<void> => {
 		if (!browser) return;
 		if (!('indexedDB' in window)) return;
-		const db = await openDB('components', 1);
+		const db = await dbConnect();
 		await db.put('doc', {
 			key,
 			value
@@ -38,7 +32,7 @@ export const docStore = {
 	},
 	clear: async (key: string): Promise<{ [key: string]: unknown }> => {
 		if (!browser) return {};
-		const db = await openDB('components', 1);
+		const db = await dbConnect();
 		await db.delete('doc', key);
 		return blanks[key] ?? {};
 	},

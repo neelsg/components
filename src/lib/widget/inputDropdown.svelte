@@ -39,8 +39,6 @@ An input box with a popup that will display the available values
 		setTimeout(() => dispatch('input'), 1);
 	};
 
-	$: datalistId = 'dl_' + (Math.random() * 1000000000).toFixed(0);
-
 	let element: HTMLInputElement;
 
 	$: updated(value);
@@ -151,7 +149,6 @@ An input box with a popup that will display the available values
 			{disabled}
 			{placeholder}
 			{form}
-			list={datalistId}
 			bind:value
 			bind:this={element}
 		/>
@@ -261,9 +258,3 @@ An input box with a popup that will display the available values
 		</div>
 	</Popup>
 </label>
-
-<datalist id={datalistId}>
-	{#each options ?? [] as l}
-		<option value={l[0]} />
-	{/each}
-</datalist>

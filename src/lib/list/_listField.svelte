@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import { formattedNumber } from '../util/number';
+	import { numberFormat } from '../util/number';
 
 	export type listField = {
 		key: string;
@@ -19,7 +19,7 @@
 		const v = definition.fn ? definition.fn(meta, item) : item[definition.key];
 		if (typeof v == 'boolean') return v ? 'Y' : '';
 		if (typeof v == 'undefined') return '';
-		if (typeof v == 'number') return formattedNumber(v, definition.decimals ?? 0);
+		if (typeof v == 'number') return numberFormat(v, definition.decimals ?? 0);
 		return String(v);
 	};
 </script>

@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	import type { reportItem } from './_reportItem.svelte';
 	import type { pdfWidth } from '../widget/pdf.svelte';
-	import { formattedNumber } from '../util/number';
+	import { numberFormat } from '../util/number';
 
 	type fieldText = {
 		type?: 'text' | undefined;
@@ -29,7 +29,7 @@
 		}
 		if (definition.type == 'number') {
 			if (!item[definition.key]) return '-';
-			return formattedNumber(item[definition.key], definition.decimals ?? 0);
+			return numberFormat(item[definition.key], definition.decimals ?? 0);
 		}
 		if (definition.type == 'check') return item[definition.key] ? 'Yes' : '-';
 		return item[definition.key] ?? ' ';
